@@ -1,16 +1,17 @@
 import React from "react";
+import Main from "./Main";
 import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
+import Sidebar from "../../../components/Sidebar";
 
 const Workspaces = () => {
   return (
-    <div>
+    <>
       <Navbar />
-
-      <div className="px-1">
+      <div className="flex">
         <Sidebar />
+        <Main />
       </div>
-    </div>
+    </>
   );
 };
 

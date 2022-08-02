@@ -1,10 +1,10 @@
-import { ChartSquareBarIcon, ChevronDownIcon } from "@heroicons/react/outline";
+import { ChartSquareBarIcon } from "@heroicons/react/outline";
 import { EyeIcon, PlusIcon } from "@heroicons/react/solid";
 import React from "react";
 
 const Sidebar = () => {
   return (
-    <>
+    <div className="sm:flex flex-col hidden">
       <div className="w-60 mt-10 px-4 text-sm">
         <div className="flex items-center justify-start hover:bg-slate-200 py-1 text-left space-x-1 pl-4 cursor-pointer rounded-sm">
           <EyeIcon className="h-4" />
@@ -34,11 +34,11 @@ const Sidebar = () => {
             <p>Workspace Name</p>
           </div>
           <div className="p-1 cursor-pointer hover:bg-slate-200 ">
-            <ChevronDownIcon className="h-4" />
+            {/* <ChevronDownIcon className="h-4" /> */}
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

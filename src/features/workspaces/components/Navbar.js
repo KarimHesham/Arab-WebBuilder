@@ -1,11 +1,6 @@
 import React from "react";
 import "../styles/navbar.css";
-import {
-  BellIcon,
-  SearchIcon,
-  UserCircleIcon,
-  ChevronDownIcon,
-} from "@heroicons/react/outline";
+import { BellIcon, SearchIcon, UserCircleIcon } from "@heroicons/react/outline";
 import Dropdown from "./Dropdown";
 
 const Navbar = () => {
@@ -15,7 +10,7 @@ const Navbar = () => {
         <img
           src="http://arabcode.ae/images/arab-logo.png"
           alt=""
-          className="w-16 h-8 object-contain"
+          className="h-8"
         />
 
         <div className="hidden sm:flex items-center justify-center space-x-10">
@@ -37,11 +32,11 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center justify-center space-x-2 lg:space-x-6">
-        <div className="sm:flex flex-grow items-center rounded-md bg-white p-2 space-x-1">
+        <div className="sm:flex items-center rounded-sm bg-slate-300 sm:bg-white p-2 space-x-1">
           <SearchIcon className="h-4" />
 
           <input
-            className="hidden sm:flex h-full flex-grow flex-shrink rounded-sm focus:outline-none"
+            className="hidden sm:flex h-full rounded-sm focus:outline-none"
             type="text"
             placeholder="Search"
           />

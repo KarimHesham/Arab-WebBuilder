@@ -4,6 +4,6 @@
 
 @layer components {
   .navbar {
-    @apply relative w-full flex flex-wrap items-center justify-between py-2 px-4 bg-slate-200;
+    @apply w-screen flex flex-wrap items-center justify-between py-2 px-4 bg-slate-200;
   }
 }

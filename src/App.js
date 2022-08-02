@@ -1,6 +1,5 @@
 import { Editor } from "./features/editor/index";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import "./index.css";
 import { Workspaces } from "./features/workspaces";
 
