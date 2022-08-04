@@ -10,7 +10,11 @@ const Recent = () => {
         <h2 className="font-bold">Recently viewed</h2>
       </div>
 
-      <Board />
+      <div className="flex items-center flex-wrap">
+        <Board />
+        <Board />
+        <Board />
+      </div>
     </div>
   );
 };
