@@ -1,8 +1,6 @@
 import { ChartBarIcon } from "@heroicons/react/outline";
 import React from "react";
-import { Board } from "../../../components";
-import Sidebar from "../../../components/Sidebar";
-import Navbar from "../../workspaces/components/Navbar";
+import { Board, Navbar, Sidebar } from "../../../components";
 
 const Workspace = () => {
   return (

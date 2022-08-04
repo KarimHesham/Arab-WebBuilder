@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/navbar.css";
+import "./styles/navbar.css";
 import { BellIcon, SearchIcon, UserCircleIcon } from "@heroicons/react/outline";
 import Dropdown from "./Dropdown";
 

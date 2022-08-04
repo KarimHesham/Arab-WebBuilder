@@ -1,3 +1,3 @@
-import Workspace from "./components/workspace";
+import Workspace from "./components/Workspace";
 
 export { Workspace };

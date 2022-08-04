@@ -1,7 +1,6 @@
 import React from "react";
+import { Navbar, Sidebar } from "../../../components";
 import Main from "./Main";
-import Navbar from "./Navbar";
-import Sidebar from "../../../components/Sidebar";
 
 const Workspaces = () => {
   return (
