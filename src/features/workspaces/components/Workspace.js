@@ -6,7 +6,7 @@ const Workspace = () => {
   return (
     <div className="space-y-4">
       <div className="flex flex-col md:flex-row items-center justify-between md:space-x-16 space-y-2">
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center justify-start space-x-2">
           <ChartSquareBarIcon className="h-8" />
           <h2 className="font-bold">Workspace Name</h2>
         </div>

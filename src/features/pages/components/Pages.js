@@ -5,20 +5,20 @@ import Page from "./Page";
 
 const Pages = () => {
   return (
-    <div>
+    <>
       <Navbar />
       <div className="flex">
         <Sidebar />
 
-        <div className="mt-10 space-y-4">
-          <div className="flex items-center justify-start space-x-1">
+        <div className="mt-10 space-y-4 space-x-4">
+          <div className="flex items-center">
             <ChartBarIcon className="h-4" />
             <h2>Your pages</h2>
           </div>
           <Page />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
