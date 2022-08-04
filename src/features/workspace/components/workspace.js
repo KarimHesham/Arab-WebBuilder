@@ -1,0 +1,26 @@
+import { ChartBarIcon } from "@heroicons/react/outline";
+import React from "react";
+import { Board } from "../../../components";
+import Sidebar from "../../../components/Sidebar";
+import Navbar from "../../workspaces/components/Navbar";
+
+const Workspace = () => {
+  return (
+    <div>
+      <Navbar />
+      <div className="flex">
+        <Sidebar />
+
+        <div className="mt-10 space-y-4">
+          <div className="flex space-x-1 items-center justify-start">
+            <ChartBarIcon className="h-4" />
+            <h2 className="font-bold text-gray-600">Your boards</h2>
+          </div>
+          <Board />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Workspace;
