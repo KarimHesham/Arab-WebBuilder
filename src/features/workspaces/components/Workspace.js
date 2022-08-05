@@ -29,7 +29,12 @@ const Workspace = () => {
           </div> */}
         </div>
       </div>
-      <Board />
+      <div className="flex items-center flex-wrap">
+        <Board />
+        <Board />
+        <Board />
+        <Board />
+      </div>
     </div>
   );
 };
