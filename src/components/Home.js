@@ -7,7 +7,7 @@ const Home = () => {
         <a href="/home">Landing</a>
         <a href="/demo">Editor</a>
         <a href="/workspaces">Workspaces</a>
-        <a href="/workspace">Workspace</a>
+        <a href="/project">Workspace</a>
         <a href="/pages">Pages</a>
       </div>
     </div>

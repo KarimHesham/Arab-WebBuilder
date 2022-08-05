@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .workspace-button {
+    @apply flex items-center bg-slate-100 px-12 py-1 md:px-4 space-x-2 rounded-md text-sm hover:bg-slate-200 m-1;
+  }
+
+  .card-container {
+    @apply flex items-center flex-wrap;
+  }
+}

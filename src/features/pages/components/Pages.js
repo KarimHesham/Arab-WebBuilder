@@ -22,9 +22,11 @@ const Pages = () => {
               <p>New</p>
             </div>
           </div>
-          <div className="flex items-center flex-wrap">
+          <div className="card-container">
             <Page />
-            <Page /> <Page /> <Page />
+            <Page />
+            <Page />
+            <Page />
           </div>
         </div>
       </div>

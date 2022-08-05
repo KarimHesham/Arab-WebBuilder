@@ -1,4 +1,4 @@
-import Board from "./Board";
+import Board from "./Project";
 import Dropdown from "./Dropdown";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";

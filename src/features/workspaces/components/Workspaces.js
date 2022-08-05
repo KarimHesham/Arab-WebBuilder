@@ -1,12 +1,13 @@
 import React from "react";
 import { Navbar, Sidebar } from "../../../components";
 import Main from "./Main";
+import "../styles/styles.css";
 
 const Workspaces = () => {
   return (
     <>
       <Navbar />
-      <div className="flex px-2 md:px-36 ">
+      <div className="flex px-2 md:px-36">
         <Sidebar />
         <Main />
       </div>
