@@ -5170,6 +5170,11 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.4, 
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.10.tgz#147d3a006da4ca3ce14728c7aefc287c367d7a6c"
   integrity sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==
 
+grapesjs-blocks-basic@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/grapesjs-blocks-basic/-/grapesjs-blocks-basic-0.1.8.tgz#9eab7c8fd7bc30537143677320b07d85b9bd2e8f"
+  integrity sha512-Iy5M4qGkEE2llb5ZFxitDolRJ3CrQkcK1SQIjRRlkWIAC99On3T/09iFR7NkpTBfsgfdNwcwnSVOMOhSnVLDtw==
+
 grapesjs@^0.19.5:
   version "0.19.5"
   resolved "https://registry.yarnpkg.com/grapesjs/-/grapesjs-0.19.5.tgz#8d0045e332e98b1e56edc2b3ef31aee10c8fbf52"
