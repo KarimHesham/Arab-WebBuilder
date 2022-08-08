@@ -25,13 +25,12 @@ const Navbar = () => {
 
       <div className="flex items-center justify-center space-x-2 lg:space-x-6">
         <div className="sm:flex items-center rounded-md border sm:bg-white p-2 space-x-1">
-          <SearchIcon className="h-4" />
-
           <input
             className="hidden sm:flex h-full rounded-sm focus:outline-none"
             type="text"
             placeholder="Search"
           />
+          <SearchIcon className="h-4" />
         </div>
 
         <BellIcon className="navbar-button" />

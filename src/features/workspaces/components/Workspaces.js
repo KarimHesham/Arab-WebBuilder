@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Sidebar } from "../../../components";
 import Main from "./Main";
-import "../styles/styles.css";
+import "../styles/workspaces.css";
 
 const Workspaces = () => {
   return (
