@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import grapesjs from "grapesjs";
-import gjsBlocksBasic from "grapesjs-blocks-basic";
 import { Navbar } from "../../../components";
-import { ChartSquareBarIcon } from "@heroicons/react/outline";
 import Sidebar from "./Sidebar";
+import gjsBlockBasic from "grapesjs-blocks-basic";
 
 const Editor = () => {
   const [editor, setEditor] = useState(null);
@@ -11,21 +10,36 @@ const Editor = () => {
   useEffect(() => {
     const editor = grapesjs.init({
       container: "#editor",
-      plugins: [],
-      pluginsOpts: {},
       blockManager: {
         appendTo: "#blocks",
       },
+      layerManager: {
+        appendTo: "#layers",
+      },
+      styleManager: {
+        appendTo: "#styles",
+      },
+      plugins: [gjsBlockBasic],
+      pluginsOpts: {
+        gjsBlockBasic: {},
+      },
+      // storageManager: false,
     });
 
     setEditor(editor);
   }, []);
 
   return (
-    <>
+    <div>
       <Navbar />
-      <Sidebar />
-    </>
+      <div className="flex h-8">
+        <Sidebar />
+        <div className="w-screen">
+          <div className="w-full border-2 border-slate-500">Devices Basics</div>
+          <div id="editor" className=""></div>
+        </div>
+      </div>
+    </div>
   );
 };
 
