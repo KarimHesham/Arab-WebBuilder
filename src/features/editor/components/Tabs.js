@@ -64,7 +64,7 @@ const Tabs = () => {
           <div className="flex-auto">
             <div className="tab-content tab-space">
               <div
-                className={openTab === 1 ? "visible" : "hidden"}
+                className={`${openTab === 1 ? "visible" : "hidden"}`}
                 id="blocks"
               ></div>
               <div

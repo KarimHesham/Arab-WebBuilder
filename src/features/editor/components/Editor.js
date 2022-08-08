@@ -10,6 +10,11 @@ const Editor = () => {
   useEffect(() => {
     const editor = grapesjs.init({
       container: "#editor",
+      height: "100vh",
+      plugins: [gjsBlockBasic],
+      pluginsOpts: {
+        gjsBlockBasic: {},
+      },
       blockManager: {
         appendTo: "#blocks",
       },
@@ -19,9 +24,8 @@ const Editor = () => {
       styleManager: {
         appendTo: "#styles",
       },
-      plugins: [gjsBlockBasic],
-      pluginsOpts: {
-        gjsBlockBasic: {},
+      panels: {
+        defaults: {},
       },
       // storageManager: false,
     });
@@ -30,12 +34,12 @@ const Editor = () => {
   }, []);
 
   return (
-    <div>
+    <div className="">
       <Navbar />
-      <div className="flex h-8">
+      <div className="flex">
         <Sidebar />
-        <div className="w-screen">
-          <div className="w-full border-2 border-slate-500">Devices Basics</div>
+        <div className="w-full">
+          <div className="w-full border-2 border-slate-300">Devices Basics</div>
           <div id="editor" className=""></div>
         </div>
       </div>

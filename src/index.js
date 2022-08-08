@@ -5,7 +5,7 @@ import "./components/styles/styles.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "grapesjs/dist/css/grapes.min.css";
-// import "grapesjs-blocks-basic/dist/grapesjs-blocks-basic.min.js";
+import "./features/editor/styles/editor.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
