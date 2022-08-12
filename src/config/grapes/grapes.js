@@ -1,5 +1,6 @@
 import grapesjs from "grapesjs";
 import gjsBlockBasic from "grapesjs-blocks-basic";
+import gjsPluginExport from "grapesjs-plugin-export";
 import {
   blockManager,
   layerManager,
@@ -15,7 +16,7 @@ const editorConfig = () => {
     height: "100%",
     width: "100%",
 
-    plugins: [gjsBlockBasic],
+    plugins: [gjsBlockBasic, gjsPluginExport],
     pluginsOpts: {
       gjsBlockBasic: {},
     },
