@@ -18,10 +18,12 @@ const Editor = () => {
       <div className="flex">
         <Sidebar />
         <div className="w-full">
-          <div className="w-full h-10 bg-slate-500 flex items-center space-x-6">
-            <div className="panel-devices flex items-center space-x-3"></div>
+          <div className="flex justify-center space-x-96">
+            <div className="panel-devices"></div>
+            <div className="panel-editor"></div>
             <div className="panel-basic-actions"></div>
           </div>
+
           <div id="editor" className=""></div>
         </div>
       </div>

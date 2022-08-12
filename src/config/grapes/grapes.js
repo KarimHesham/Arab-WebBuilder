@@ -12,7 +12,8 @@ import {
 const editorConfig = () => {
   const editor = grapesjs.init({
     container: "#editor",
-    height: "100vh",
+    height: "100%",
+    width: "100%",
 
     plugins: [gjsBlockBasic],
     pluginsOpts: {
