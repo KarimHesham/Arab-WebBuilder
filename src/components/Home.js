@@ -8,7 +8,7 @@ const Home = () => {
         <a href="/demo">Editor</a>
         <a href="/workspaces">Workspaces</a>
         <a href="/project">Workspace</a>
-        <a href="/pages">Pages</a>
+        <a href="/pages">Project</a>
       </div>
     </div>
   );
