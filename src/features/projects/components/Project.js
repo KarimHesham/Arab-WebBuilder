@@ -1,6 +1,6 @@
-import { ChartBarIcon } from "@heroicons/react/outline";
 import React from "react";
-import { Board, Navbar, Sidebar } from "../../../components";
+import { Project, Navbar, Sidebar } from "../../../components";
+import ConstructionIcon from "@mui/icons-material/Construction";
 
 const Workspace = () => {
   return (
@@ -11,10 +11,10 @@ const Workspace = () => {
 
         <div className="mt-10 space-y-4">
           <div className="flex space-x-1 items-center justify-start">
-            <ChartBarIcon className="h-4" />
-            <h2 className="font-bold text-gray-600">Your boards</h2>
+            <ConstructionIcon className="h-4" />
+            <h2 className="font-bold text-gray-600">Your Projects</h2>
           </div>
-          <Board />
+          <Project />
         </div>
       </div>
     </div>

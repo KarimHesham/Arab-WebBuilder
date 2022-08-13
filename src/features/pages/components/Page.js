@@ -1,5 +1,6 @@
-import { PencilIcon, TrashIcon } from "@heroicons/react/solid";
 import React from "react";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Page = () => {
   return (
@@ -11,8 +12,8 @@ const Page = () => {
       <div className="flex items-center justify-between">
         <p className="text-xs text-gray-500">2 hrs ago</p>
         <div className="flex items-center justify-end space-x-1">
-          <PencilIcon className="h-4 text-blue-700 hover:scale-125" />
-          <TrashIcon className="h-4 text-red-500 hover:scale-125" />
+          <EditIcon className="text-blue-700 hover:scale-125" />
+          <DeleteIcon className="text-red-500 hover:scale-125" />
         </div>
       </div>
     </div>

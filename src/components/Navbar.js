@@ -1,6 +1,8 @@
 import React from "react";
-import { BellIcon, SearchIcon, UserCircleIcon } from "@heroicons/react/outline";
 import Dropdown from "./Dropdown";
+import SearchIcon from "@mui/icons-material/Search";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const Navbar = () => {
   return (
@@ -33,9 +35,9 @@ const Navbar = () => {
           <SearchIcon className="h-4" />
         </div>
 
-        <BellIcon className="navbar-button" />
+        <NotificationsNoneIcon className="navbar-button" />
 
-        <UserCircleIcon className="navbar-button" />
+        <AccountCircleIcon className="navbar-button" />
       </div>
     </nav>
   );

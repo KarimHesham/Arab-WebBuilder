@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 const Dropdown = () => {
   return (
@@ -9,7 +9,7 @@ const Dropdown = () => {
         <div>
           <Menu.Button className="inline-flex w-full justify-center rounded-md hover:bg-slate-400 px-4 py-2 text-sm font-medium text-black hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
             Options
-            <ChevronDownIcon
+            <ArrowDropDownIcon
               className="ml-2 -mr-1 h-5 w-5 text-violet-800 hover:text-violet-100"
               aria-hidden="true"
             />

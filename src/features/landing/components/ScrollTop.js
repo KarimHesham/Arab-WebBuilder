@@ -1,5 +1,5 @@
-import { ArrowCircleUpIcon } from "@heroicons/react/solid";
 import React, { useState, useEffect } from "react";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 const ScrollTop = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -17,7 +17,7 @@ const ScrollTop = () => {
   }, []);
 
   return (
-    <ArrowCircleUpIcon
+    <KeyboardArrowUpIcon
       className={`${
         showScrollTop ? "fixed" : "hidden"
       } w-10 h-10 bottom-2 lg:right-20 right-6 bg-green-600 rounded-full p-2 hover:scale-125 mx-auto z-10`}

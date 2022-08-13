@@ -1,5 +1,7 @@
-import { ChartBarIcon } from "@heroicons/react/solid";
 import React from "react";
+import GridViewIcon from "@mui/icons-material/GridView";
+import LayersIcon from "@mui/icons-material/Layers";
+import PaletteIcon from "@mui/icons-material/Palette";
 
 const Tabs = () => {
   const [openTab, setOpenTab] = React.useState(1);
@@ -21,7 +23,7 @@ const Tabs = () => {
               href="#blocks"
               role="tablist"
             >
-              <ChartBarIcon className="h-5 text-blue-600" />
+              <GridViewIcon className="h-4 text-blue-600" />
             </a>
           </li>
           <li
@@ -38,7 +40,7 @@ const Tabs = () => {
               href="#layers"
               role="tablist"
             >
-              <ChartBarIcon className="h-5 text-blue-600" />
+              <LayersIcon className="h-5 text-blue-600" />
             </a>
           </li>
           <li
@@ -55,7 +57,7 @@ const Tabs = () => {
               href="#styles"
               role="tablist"
             >
-              <ChartBarIcon className="h-5 text-blue-600" />
+              <PaletteIcon className="h-5 text-blue-600" />
             </a>
           </li>
         </ul>
@@ -84,6 +86,3 @@ const Tabs = () => {
 };
 
 export default Tabs;
-// export default function TabsRender() {
-//   return <Tabs color="pink" />;
-// }
