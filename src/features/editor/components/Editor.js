@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Navbar } from "../../../components";
 import Sidebar from "./Sidebar";
-import editorConfig from "../../../config/grapes/grapes";
+import { editorConfig } from "../../../config/index";
 
 const Editor = () => {
   const [editor, setEditor] = useState(null);

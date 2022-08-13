@@ -58,15 +58,15 @@ export const panels = {
           className: "fa fa-repeat",
           command: "redo",
         },
-        {
-          id: "export",
-          className: "fa fa-download",
-          command: "export",
-        },
+        // {
+        //   id: "export",
+        //   className: "fa fa-download",
+        //   command: "export",
+        // },
         {
           id: "open-code",
           className: "fa fa-code",
-          command: "open-code",
+          command: "export-template",
         },
         {
           id: "preview",

@@ -32,6 +32,6 @@ export const addEditorCommand = (editor) => {
   });
 
   editor.Commands.add("open-code", {
-    run: (editor) => editor.CodeManager.open(),
+    run: (editor) => editor.CodeManager.buildEditor(editor),
   });
 };
