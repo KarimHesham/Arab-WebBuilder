@@ -1,9 +1,9 @@
-import { ChartSquareBarIcon } from "@heroicons/react/outline";
-import { EyeIcon, PlusIcon } from "@heroicons/react/solid";
 import React from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import AddIcon from "@mui/icons-material/Add";
-import WorkspacesIcon from "@mui/icons-material/Workspaces";
+import Workspace from "./Workspace";
+
+const workspaces = require("../../data/workspaces.json");
 
 const Sidebar = () => {
   return (
@@ -32,14 +32,13 @@ const Sidebar = () => {
         </div>
 
         <div className="space-y-2">
-          <div className="sidebar-item">
-            <WorkspacesIcon className="h-6" />
-            <p>Workspace Name</p>
-          </div>
-          <div className="sidebar-item">
-            <WorkspacesIcon className="h-6" />
-            <p>Workspace Name</p>
-          </div>
+          {workspaces.length > 0 ? (
+            workspaces.map((workspace) => {
+              return <Workspace key={workspace.id} name={workspace.name} />;
+            })
+          ) : (
+            <p className="text-sm pl-2">Create your first workspace</p>
+          )}
         </div>
       </div>
     </div>

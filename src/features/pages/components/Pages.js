@@ -4,6 +4,8 @@ import Page from "./Page";
 import AddIcon from "@mui/icons-material/Add";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 
+const project = require("../../../data/project.json");
+
 const Pages = () => {
   return (
     <>
@@ -24,10 +26,17 @@ const Pages = () => {
             </div>
           </div>
           <div className="card-container">
-            <Page />
-            <Page />
-            <Page />
-            <Page />
+            {project.pages.length > 0
+              ? project.pages.map((page) => {
+                  return (
+                    <Page
+                      key={page.id}
+                      name={page.name}
+                      created={page.createdAt}
+                    />
+                  );
+                })
+              : "Create your first page"}
           </div>
         </div>
       </div>

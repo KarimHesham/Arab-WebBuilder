@@ -1,0 +1,14 @@
+{
+  "id": 0,
+  "name": "Test Workspace",
+  "projects": [
+    {
+      "id": 0,
+      "name": "Test Project"
+    },
+    {
+      "id": 1,
+      "name": "Another Project"
+    }
+  ]
+}

@@ -2,6 +2,8 @@ import React from "react";
 import { Project, Navbar, Sidebar } from "../../../components";
 import ConstructionIcon from "@mui/icons-material/Construction";
 
+const workspace = require("../../../data/workspace.json");
+
 const Workspace = () => {
   return (
     <div>
@@ -14,7 +16,11 @@ const Workspace = () => {
             <ConstructionIcon className="h-4" />
             <h2 className="font-bold text-gray-600">Your Projects</h2>
           </div>
-          <Project />
+          <div className="flex flex-wrap">
+            {workspace.projects.map((project) => {
+              return <Project key={project.id} name={project.name} />;
+            })}
+          </div>
         </div>
       </div>
     </div>

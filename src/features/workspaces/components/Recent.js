@@ -1,6 +1,7 @@
 import React from "react";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { Project } from "../../../components/index";
+const data = require("../../../data/test.json");
 
 const Recent = () => {
   return (
@@ -11,9 +12,18 @@ const Recent = () => {
       </div>
 
       <div className="card-container">
+        {/* <Project />
         <Project />
-        <Project />
-        <Project />
+        <Project /> */}
+        {data.map((project) => {
+          return (
+            <Project
+              key={project.id}
+              id={project.id}
+              name={project.projectName}
+            />
+          );
+        })}
       </div>
     </div>
   );
