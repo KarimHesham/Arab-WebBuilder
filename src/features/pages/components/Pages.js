@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar, Sidebar } from "../../../components";
 import Page from "./Page";
 import AddIcon from "@mui/icons-material/Add";
@@ -9,6 +9,19 @@ const project = require("../../../data/project.json");
 
 const Pages = () => {
   const [showModal, setShowModal] = useState(false);
+  const [counter, setCounter] = useState(2);
+
+  const [newPage, setNewPage] = useState({});
+
+  useEffect(() => {
+    console.log(project.pages);
+  }, []);
+
+  const addPage = (page) => {
+    project.pages.push(page);
+    setCounter(counter + 1);
+    setShowModal(false);
+  };
 
   return (
     <>
@@ -58,6 +71,13 @@ const Pages = () => {
                   className="border-2 border-gray-400 rounded-md px-1 w-full bg-white"
                   placeholder="Enter page name"
                   type="text"
+                  onChange={(e) =>
+                    setNewPage({
+                      id: counter,
+                      name: e.target.value,
+                      createdAt: new Date().toLocaleDateString(),
+                    })
+                  }
                 />
 
                 <div className="flex space-x-1 justify-end">
@@ -68,7 +88,7 @@ const Pages = () => {
                     Cancel
                   </button>
                   <button
-                    onClick={() => setShowModal(false)}
+                    onClick={() => addPage(newPage)}
                     className="w-16 h-6 text-xs md:text-sm bg-blue-600 rounded-md justify-center text-white hover:bg-blue-700 cursor-pointer font-semibold"
                   >
                     Add
