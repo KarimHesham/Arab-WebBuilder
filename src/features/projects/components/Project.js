@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Project, Navbar, Sidebar } from "../../../components";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import AddIcon from "@mui/icons-material/Add";
@@ -7,6 +7,19 @@ const workspace = require("../../../data/workspace.json");
 
 const Workspace = () => {
   const [showModal, setShowModal] = useState(false);
+  const [counter, setCounter] = useState(2);
+
+  const [newProject, setNewProject] = useState({});
+
+  useEffect(() => {
+    console.log(workspace.projects);
+  }, []);
+
+  const addProject = (project) => {
+    workspace.projects.push(project);
+    setCounter(counter + 1);
+    setShowModal(false);
+  };
 
   return (
     <div>
@@ -47,8 +60,10 @@ const Workspace = () => {
                   className="border-2 border-gray-400 rounded-md px-1 w-full bg-white"
                   placeholder="Enter project name"
                   type="text"
+                  onChange={(e) =>
+                    setNewProject({ id: counter, name: e.target.value })
+                  }
                 />
-
                 <div className="flex space-x-1 justify-end">
                   <button
                     onClick={() => setShowModal(false)}
@@ -57,7 +72,7 @@ const Workspace = () => {
                     Cancel
                   </button>
                   <button
-                    onClick={() => setShowModal(false)}
+                    onClick={() => addProject(newProject)}
                     className="w-16 h-6 text-xs md:text-sm bg-blue-600 rounded-md justify-center text-white hover:bg-blue-700 cursor-pointer font-semibold"
                   >
                     Add
