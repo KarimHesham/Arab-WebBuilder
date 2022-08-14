@@ -2,6 +2,7 @@ import React from "react";
 import { Project } from "../../../components/index";
 import GamepadIcon from "@mui/icons-material/Gamepad";
 import WorkspacesIcon from "@mui/icons-material/Workspaces";
+
 const Workspace = ({ id, name, projects }) => {
   return (
     <div className="space-y-4">
