@@ -3,7 +3,6 @@ import { Navbar, Sidebar } from "../../../components";
 import Page from "./Page";
 import AddIcon from "@mui/icons-material/Add";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
-// import AddPageModal from "./AddPageModal";
 
 const project = require("../../../data/project.json");
 
@@ -53,7 +52,6 @@ const Pages = () => {
                       key={page.id}
                       name={page.name}
                       created={page.createdAt}
-                      project={project}
                     />
                   );
                 })

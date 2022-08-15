@@ -5,7 +5,7 @@ import AddIcon from "@mui/icons-material/Add";
 
 const Sidebar = () => {
   return (
-    <div className="w-48 md:w-64 h-screen overflow-y-scroll overflow-x-hidden bg-white border-r-2 rounded-md">
+    <div className="w-48 md:w-64 h-screen overflow-y-scroll overflow-x-hidden bg-gray-100 border-r-2 rounded-md">
       <button className="flex items-center bg-blue-600 hover:bg-blue-700 px-4 py-1 rounded-md my-6 justify-center text-white w-10/12 mx-auto">
         <AddIcon className="h-4" />
         Add Page
