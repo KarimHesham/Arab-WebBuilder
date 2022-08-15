@@ -15,14 +15,14 @@ const Navbar = () => {
         />
 
         <div className="hidden sm:flex items-center justify-center space-x-10">
+          {/* <Dropdown />
           <Dropdown />
-          <Dropdown />
-          <Dropdown />
+          <Dropdown /> */}
         </div>
 
-        <div className="sm:hidden">
+        {/* <div className="sm:hidden">
           <Dropdown />
-        </div>
+        </div> */}
       </div>
 
       <div className="flex items-center justify-center space-x-2 lg:space-x-6">

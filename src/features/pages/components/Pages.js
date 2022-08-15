@@ -53,6 +53,7 @@ const Pages = () => {
                       key={page.id}
                       name={page.name}
                       created={page.createdAt}
+                      project={project}
                     />
                   );
                 })

@@ -31,7 +31,19 @@ export const addEditorCommand = (editor) => {
     run: (editor) => editor.runCommand("gjs-export-zip"),
   });
 
-  editor.Commands.add("open-code", {
-    run: (editor) => editor.CodeManager.buildEditor(editor),
+  editor.Commands.add("arab-code", {
+    run: (editor) => {
+      editor.Modal.open({
+        title: "Arab code",
+        content:
+          "<div style='width: 50vw; height:80vh;'><textarea style='width: 80%; height: 90%;' placeholder='Arab code goes here...'></textarea></div>",
+        attirbutes: {
+          class: "arab-modal",
+        },
+      }).onceClose(() => editor.stopCommand("arab-code"));
+    },
+    stop: (editor) => {
+      editor.Modal.close();
+    },
   });
 };

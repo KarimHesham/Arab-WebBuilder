@@ -7,8 +7,12 @@ const Page = () => {
     <li className="flex items-center justify-between shadow-sm px-4 py-2 hover:scale-105 hover:bg-slate-100">
       Page1
       <div className="flex items-center">
-        <EditIcon className="scale-75 text-blue-600 hover:scale-100" />
-        <DeleteIcon className="scale-75 text-red-500 hover:scale-100" />
+        <button>
+          <EditIcon className="scale-75 text-blue-600 hover:scale-100" />
+        </button>
+        <button>
+          <DeleteIcon className="scale-75 text-red-500 hover:scale-100" />
+        </button>
       </div>
     </li>
   );
