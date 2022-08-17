@@ -1,11 +1,11 @@
 import { Editor } from "./features/editor/index";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./index.css";
 import { Workspaces } from "./features/workspaces";
 import { Project } from "./features/projects";
 import Pages from "./features/pages/components/Pages";
 import Home from "./components/Home";
 import Landing from "./features/landing/components/Landing";
+import "./index.css";
 
 function App() {
   return (

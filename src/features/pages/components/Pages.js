@@ -1,23 +1,36 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setPages,
+  addPage,
+  removePage,
+  getPages,
+  selectPages,
+} from "../../../state/features/pages/userPagesSlice";
 import { Navbar, Sidebar } from "../../../components";
 import Page from "./Page";
 import AddIcon from "@mui/icons-material/Add";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
-
 const project = require("../../../data/project.json");
 
 const Pages = () => {
+  const pages = useSelector((state) => state.userPages.pages);
+
+  const dispatch = useDispatch();
+
   const [showModal, setShowModal] = useState(false);
   const [counter, setCounter] = useState(2);
 
   const [newPage, setNewPage] = useState({});
 
   useEffect(() => {
-    console.log(project.pages);
-  }, []);
+    dispatch(setPages(project.pages));
 
-  const addPage = (page) => {
-    project.pages.push(page);
+    console.log(pages);
+  }, [dispatch]);
+
+  const addNewPage = (page) => {
+    dispatch(addPage(page));
     setCounter(counter + 1);
     setShowModal(false);
   };
@@ -45,8 +58,8 @@ const Pages = () => {
           </div>
 
           <div className="card-container">
-            {project.pages.length > 0
-              ? project.pages.map((page) => {
+            {pages.length > 0
+              ? pages.map((page) => {
                   return (
                     <Page
                       key={page.id}
@@ -87,7 +100,9 @@ const Pages = () => {
                     Cancel
                   </button>
                   <button
-                    onClick={() => addPage(newPage)}
+                    onClick={() => {
+                      addNewPage(newPage);
+                    }}
                     className="w-16 h-6 text-xs md:text-sm bg-blue-600 rounded-md justify-center text-white hover:bg-blue-700 cursor-pointer font-semibold"
                   >
                     Add
