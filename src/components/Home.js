@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../state/features/userDataSlice";
+import { NavLink } from "react-router-dom";
+
+const test = require("../data/test.json");
 
 const Home = () => {
+  const user = useSelector((state) => state.userData.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!user) dispatch(setUser(test));
+
+    console.log(user);
+  }, [dispatch, user]);
+
   return (
     <div className="flex text-blue-400 items-center justify-center m-auto h-screen text-xl">
       <div className="flex items-center justify-center flex-col w-1/2 p-2 h-1/2 border  border-slate-400 rounded-md space-y-3 shadow-lg">
@@ -8,7 +22,7 @@ const Home = () => {
         <a href="/demo">Editor</a>
         <a href="/workspaces">Workspaces</a>
         <a href="/project">Workspace</a>
-        <a href="/pages">Project</a>
+        <NavLink to="/pages">Project</NavLink>
       </div>
     </div>
   );

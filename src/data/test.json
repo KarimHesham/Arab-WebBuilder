@@ -1,10 +1,22 @@
-[
-  {
-    "id": 0,
-    "projectName": "Test Project"
-  },
-  {
-    "id": 1,
-    "projectName": "Another Project"
-  }
-]
+{
+  "username": "my username",
+  "email": "username@email.com",
+  "workspaces": [
+    {
+      "id": 0,
+      "name": "workspace 1",
+      "projects": [
+        {
+          "id": 0,
+          "name": "Project 1",
+          "pages": [
+            {
+              "id": 0,
+              "name": "Page 1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

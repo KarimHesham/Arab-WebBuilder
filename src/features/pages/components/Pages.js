@@ -1,36 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  setPages,
-  addPage,
-  removePage,
-  getPages,
-  selectPages,
-} from "../../../state/features/pages/userPagesSlice";
+import { useSelector } from "react-redux";
 import { Navbar, Sidebar } from "../../../components";
 import Page from "./Page";
 import AddIcon from "@mui/icons-material/Add";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
-const project = require("../../../data/project.json");
 
 const Pages = () => {
-  const pages = useSelector((state) => state.userPages.pages);
-
-  const dispatch = useDispatch();
-
+  const user = useSelector((state) => state.userData.user);
+  const [pages, setPages] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [counter, setCounter] = useState(2);
 
   const [newPage, setNewPage] = useState({});
 
   useEffect(() => {
-    dispatch(setPages(project.pages));
-
-    console.log(pages);
-  }, [dispatch]);
+    setPages(user.workspaces[0].projects[0].pages);
+    console.log(user.workspaces[0].projects[0].pages);
+  }, []);
 
   const addNewPage = (page) => {
-    dispatch(addPage(page));
     setCounter(counter + 1);
     setShowModal(false);
   };
