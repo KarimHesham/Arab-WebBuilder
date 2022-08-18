@@ -2,21 +2,23 @@ import React, { useState, useEffect } from "react";
 import Page from "./Page";
 import TabsRender from "./Tabs";
 import AddIcon from "@mui/icons-material/Add";
-
-const project = require("../../../data/project.json");
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
+  const user = useSelector((state) => state.userData.user);
+  const [pages, setPages] = useState([]);
+
   const [showModal, setShowModal] = useState(false);
   const [counter, setCounter] = useState(2);
 
   const [newPage, setNewPage] = useState({});
 
   useEffect(() => {
-    console.log(project.pages);
-  }, []);
+    setPages(user.workspaces[0].projects[0].pages);
+  }, [user.workspaces]);
 
   const addPage = (page) => {
-    project.pages.push(page);
+    // project.pages.push(page);
     setCounter(counter + 1);
     setShowModal(false);
   };
@@ -71,8 +73,8 @@ const Sidebar = () => {
       </div>
       <div className="flex items-center border-b-2 border-t-2 overflow-x-hidden overflow-y-scroll scroll-smooth">
         <ul className="w-full h-40 border-slate-200">
-          {project.pages.map((page) => {
-            return <Page id={page.id} name={page.name} />;
+          {pages.map((page) => {
+            return <Page key={page.id} id={page.id} name={page.name} />;
           })}
         </ul>
       </div>

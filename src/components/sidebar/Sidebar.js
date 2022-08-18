@@ -2,21 +2,24 @@ import React, { useState, useEffect } from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import AddIcon from "@mui/icons-material/Add";
 import Workspace from "./Workspace";
-
-const workspaces = require("../../data/workspaces.json");
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
+  const user = useSelector((state) => state.userData.user);
+
+  const [workspaces, setWorkspaces] = useState([]);
+
   const [showModal, setShowModal] = useState(false);
   const [counter, setCounter] = useState(5);
 
   const [newWorkspace, setNewWorkspace] = useState({});
 
   useEffect(() => {
-    // console.log(project.pages);
-  }, []);
+    setWorkspaces(user.workspaces);
+  }, [user.workspaces]);
 
   const addWorkspace = (workspace) => {
-    workspaces.push(workspace);
+    // workspaces.push(workspace);
     setCounter(counter + 1);
     setShowModal(false);
   };

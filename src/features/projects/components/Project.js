@@ -2,21 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Project, Navbar, Sidebar } from "../../../components";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import AddIcon from "@mui/icons-material/Add";
-
-const workspace = require("../../../data/workspace.json");
+import { useSelector } from "react-redux";
 
 const Workspace = () => {
+  const user = useSelector((state) => state.userData.user);
+  const [projects, setProjects] = useState([]);
+
   const [showModal, setShowModal] = useState(false);
   const [counter, setCounter] = useState(2);
 
   const [newProject, setNewProject] = useState({});
 
   useEffect(() => {
-    console.log(workspace.projects);
-  }, []);
+    setProjects(user.workspaces[0].projects);
+  }, [user.workspaces]);
 
   const addProject = (project) => {
-    workspace.projects.push(project);
+    // workspace.projects.push(project);
     setCounter(counter + 1);
     setShowModal(false);
   };
@@ -44,7 +46,7 @@ const Workspace = () => {
           </div>
 
           <div className="flex flex-wrap">
-            {workspace.projects.map((project) => {
+            {projects.map((project) => {
               return <Project key={project.id} name={project.name} />;
             })}
           </div>

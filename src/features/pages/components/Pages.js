@@ -16,7 +16,7 @@ const Pages = () => {
   useEffect(() => {
     setPages(user.workspaces[0].projects[0].pages);
     console.log(user.workspaces[0].projects[0].pages);
-  }, []);
+  }, [user.workspaces]);
 
   const addNewPage = (page) => {
     setCounter(counter + 1);
