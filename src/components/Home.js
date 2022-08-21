@@ -7,6 +7,7 @@ const test = require("../data/test.json");
 
 const Home = () => {
   const user = useSelector((state) => state.userData.user);
+  console.log(user);
   const dispatch = useDispatch();
 
   useEffect(() => {

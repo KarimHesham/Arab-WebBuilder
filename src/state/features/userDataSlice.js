@@ -20,6 +20,4 @@ export const userPagesSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { setUser, getUser } = userPagesSlice.actions;
 
-export const selectUser = (state) => state.user;
-
 export default userPagesSlice.reducer;
