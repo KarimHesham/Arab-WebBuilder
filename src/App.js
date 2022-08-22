@@ -6,12 +6,15 @@ import Pages from "./features/pages/components/Pages";
 import Home from "./components/Home";
 import Landing from "./features/landing/components/Landing";
 import "./index.css";
+import { Login, Register } from "./features/userProfile/index";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Landing />} />
         <Route path="/demo" element={<Editor />} />
         <Route path="/workspaces" element={<Workspaces />} />
