@@ -5,8 +5,8 @@ import { Project } from "./features/projects";
 import Pages from "./features/pages/components/Pages";
 import Home from "./components/Home";
 import Landing from "./features/landing/components/Landing";
-import "./index.css";
 import { Login, Register } from "./features/userProfile/index";
+import "./index.css";
 
 function App() {
   return (
