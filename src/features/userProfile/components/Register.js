@@ -25,14 +25,14 @@ const Register = () => {
     console.log(email, password);
     if (email && password) {
       registerWithEmailAndPassword(email, password)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+        .then((res) => console.log("Registration successful"))
+        .catch((err) => err ?? console.log(err));
     }
   };
 
   const googleRegistration = () => {
     signInWithGoogle()
-      .then((res) => console.log(res))
+      .then(() => console.log("Google sign up successful"))
       .catch((err) => console.log(err));
   };
 
@@ -76,7 +76,7 @@ const Register = () => {
         initialValues={initialValues}
         validationSchema={registerValidation}
         onSubmit={(values) => {
-          console.log("form submitted");
+          console.log("Form submitted");
           emailRegistration(values);
         }}
       >

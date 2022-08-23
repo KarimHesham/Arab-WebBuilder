@@ -1,11 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import GoogleIcon from "@mui/icons-material/Google";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import {
+  auth,
+  signInWithGoogle,
+  logInWithEmailAndPassword,
+} from "../../../config/firebase/firebase";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [user, loading, error] = useAuthState(auth);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loading || error) return;
+
+    if (user) navigate("/workspaces");
+  });
+
+  const emailLogin = (values) => {
+    setEmail(values.email);
+    setPassword(values.password);
+    console.log(email, password);
+    if (email && password) {
+      logInWithEmailAndPassword(email, password)
+        .then(() => "Login successful")
+        .catch((err) => err ?? console.log(err));
+    }
+  };
+
+  const googleLogin = () => {
+    signInWithGoogle()
+      .then(() => console.log("Google sign in successful"))
+      .catch((err) => err ?? console.log(err));
+  };
+
+  useEffect(() => {
+    if (loading || error) return;
+    if (user) navigate("/workspaces");
+  }, [user, loading]);
+
   const initialValues = {
     email: "",
     password: "",
@@ -23,8 +64,9 @@ const Login = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={loginValidation}
-        onSubmit={async () => {
+        onSubmit={(values) => {
           console.log("form submitted");
+          emailLogin(values);
         }}
       >
         <section className="h-screen">
@@ -45,6 +87,7 @@ const Login = () => {
                       type="button"
                       data-mdb-ripple="true"
                       data-mdb-ripple-color="light"
+                      onClick={() => googleLogin()}
                       className="inline-block p-3 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
                     >
                       <GoogleIcon />
