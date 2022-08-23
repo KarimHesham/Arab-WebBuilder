@@ -1,11 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import GoogleIcon from "@mui/icons-material/Google";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import {
+  auth,
+  registerWithEmailAndPassword,
+  signInWithGoogle,
+} from "../../../config/firebase/firebase";
 
 const Register = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [user, loading, error] = useAuthState(auth);
+
+  const navigate = useNavigate();
+
+  const emailRegistration = (values) => {
+    setEmail(values.email);
+    setPassword(values.password);
+    console.log(email, password);
+    if (email && password) {
+      registerWithEmailAndPassword(email, password)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    }
+  };
+
+  const googleRegistration = () => {
+    signInWithGoogle()
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    if (loading || error) return;
+    if (user) navigate("/workspaces");
+  }, [user, loading]);
+
   const initialValues = {
     email: "",
     password: "",
@@ -13,9 +48,9 @@ const Register = () => {
   };
 
   const registerValidation = Yup.object().shape({
-    email: Yup.string().email("Invalid Email").required("Email is required"),
+    email: Yup.string().email("Invalid Email").required("Required"),
     password: Yup.string()
-      .required("Password is required")
+      .required("Required")
       .min(8, "Password should be at least 8 characters")
       .matches(
         /[a-z]+/,
@@ -31,7 +66,7 @@ const Register = () => {
       )
       .matches(/\d+/, "Password must contain at least one number"),
     confirmPassword: Yup.string()
-      .required("Confirm Password is Required")
+      .required("Required")
       .oneOf([Yup.ref("password"), null], "Passwords must match"),
   });
 
@@ -40,8 +75,9 @@ const Register = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={registerValidation}
-        onSubmit={async () => {
+        onSubmit={(values) => {
           console.log("form submitted");
+          emailRegistration(values);
         }}
       >
         <section className="h-screen">
@@ -62,6 +98,7 @@ const Register = () => {
                       type="button"
                       data-mdb-ripple="true"
                       data-mdb-ripple-color="light"
+                      onClick={() => googleRegistration()}
                       className="inline-block p-3 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
                     >
                       <GoogleIcon />
@@ -82,8 +119,8 @@ const Register = () => {
                   </div>
 
                   <div className="mb-6">
-                    <div className="flex justify-between">
-                      <label>Email</label>
+                    <div className="flex flex-col justify-between">
+                      <label className="font-semibold">Email</label>
 
                       <ErrorMessage
                         name="email"
@@ -102,8 +139,8 @@ const Register = () => {
                   </div>
 
                   <div className="mb-6">
-                    <div className="flex justify-between">
-                      <label>Password</label>
+                    <div className="flex flex-col justify-between">
+                      <label className="font-semibold">Password</label>
                       <ErrorMessage
                         name="password"
                         component="span"
@@ -121,8 +158,8 @@ const Register = () => {
                   </div>
 
                   <div className="mb-6">
-                    <div className="flex justify-between">
-                      <label>Confirm Password</label>
+                    <div className="flex flex-col justify-between">
+                      <label className="font-semibold">Confirm Password</label>
                       <ErrorMessage
                         name="confirmPassword"
                         component="span"

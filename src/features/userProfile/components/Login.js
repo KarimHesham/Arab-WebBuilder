@@ -65,8 +65,8 @@ const Login = () => {
                   </div>
 
                   <div className="mb-6">
-                    <div className="flex justify-between">
-                      <label>Email</label>
+                    <div className="flex flex-col justify-between">
+                      <label className="font-semibold">Email</label>
 
                       <ErrorMessage
                         name="email"
@@ -85,8 +85,8 @@ const Login = () => {
                   </div>
 
                   <div className="mb-6">
-                    <div className="flex justify-between">
-                      <label>Password</label>
+                    <div className="flex flex-col justify-between">
+                      <label className="font-semibold">Password</label>
                       <ErrorMessage
                         name="password"
                         component="span"

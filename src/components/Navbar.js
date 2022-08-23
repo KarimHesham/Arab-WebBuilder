@@ -3,8 +3,16 @@ import Dropdown from "./Dropdown";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { logout } from "../config/firebase/firebase";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const SignOut = () => {
+    logout();
+    navigate("/");
+  };
   return (
     <nav className="navbar">
       <div className="flex space-x-2 lg:space-x-6 items-center justify-center">
@@ -37,7 +45,10 @@ const Navbar = () => {
 
         <NotificationsNoneIcon className="navbar-button" />
 
-        <AccountCircleIcon className="navbar-button" />
+        <AccountCircleIcon
+          className="navbar-button"
+          onClick={() => SignOut()}
+        />
       </div>
     </nav>
   );
