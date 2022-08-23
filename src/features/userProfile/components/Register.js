@@ -44,18 +44,6 @@ const Register = () => {
           console.log("form submitted");
         }}
       >
-        {/* {(formik) => {
-          const {
-            values,
-            handleChange,
-            handleSubmit,
-            errors,
-            touched,
-            handleBlur,
-            isValid,
-            dirty,
-          } = formik;
-          return ( */}
         <section className="h-screen">
           <div className="px-6 h-full text-gray-800">
             <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
@@ -172,8 +160,6 @@ const Register = () => {
             </div>
           </div>
         </section>
-        {/* );
-        }} */}
       </Formik>
     </div>
   );
