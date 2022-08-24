@@ -38,7 +38,7 @@ const Workspace = () => {
 
             <div
               onClick={() => setShowModal(true)}
-              className="flex items-center w-16 h-6 md:w-24 md:h-8 text-xs md:text-sm bg-blue-600 rounded-md justify-center text-white hover:bg-blue-700 cursor-pointer font-semibold"
+              className="flex items-center px-6 py-1 md:px-8 text-sm md:text-sm bg-blue-600 rounded-md justify-center text-white hover:bg-blue-700 cursor-pointer font-semibold"
             >
               <AddIcon className="h-4" />
               <p>New</p>
