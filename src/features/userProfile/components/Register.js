@@ -5,11 +5,11 @@ import * as Yup from "yup";
 import { NavLink, useNavigate } from "react-router-dom";
 import GoogleIcon from "@mui/icons-material/Google";
 // import GitHubIcon from "@mui/icons-material/GitHub";
+import { auth } from "../../../config/firebase/firebase";
 import {
-  auth,
   registerWithEmailAndPassword,
   signInWithGoogle,
-} from "../../../config/firebase/firebase";
+} from "../../../services/firebase/auth";
 
 const Register = () => {
   const [email, setEmail] = useState("");

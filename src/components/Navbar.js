@@ -3,7 +3,7 @@ import React from "react";
 // import SearchIcon from "@mui/icons-material/Search";
 // import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 // import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { logout } from "../config/firebase/firebase";
+import { logout } from "../services/firebase/auth";
 import { useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 

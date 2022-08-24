@@ -5,11 +5,11 @@ import * as Yup from "yup";
 import { NavLink, useNavigate } from "react-router-dom";
 import GoogleIcon from "@mui/icons-material/Google";
 // import GitHubIcon from "@mui/icons-material/GitHub";
+import { auth } from "../../../config/firebase/firebase";
 import {
-  auth,
   signInWithGoogle,
   logInWithEmailAndPassword,
-} from "../../../config/firebase/firebase";
+} from "../../../services/firebase/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -146,7 +146,7 @@ const Login = () => {
                     />
                   </div>
 
-                  <div className="flex justify-between items-center mb-6">
+                  <div className="flex flex-col md:flex-row space-y-2 justify-between items-center mb-6">
                     <div className="form-group form-check">
                       <Field
                         type="checkbox"
@@ -161,7 +161,7 @@ const Login = () => {
                         Remember me
                       </label>
                     </div>
-                    <NavLink to="/reset" className="text-gray-800">
+                    <NavLink to="/reset" className="text-gray-800 font-medium">
                       Forgot password?
                     </NavLink>
                   </div>
