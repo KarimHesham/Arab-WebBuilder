@@ -31,7 +31,7 @@ const Workspace = ({ id, name, projects }) => {
         </div>
       </div>
       <div className="card-container">
-        {projects.length > 0
+        {projects?.length > 0
           ? projects.map((project) => {
               return <Project key={project.id} name={project.name} />;
             })

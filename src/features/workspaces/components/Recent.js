@@ -19,7 +19,7 @@ const Recent = () => {
       </div>
 
       <div className="card-container">
-        {projects.map((project) => {
+        {projects?.map((project) => {
           return (
             <Project
               key={project.id}

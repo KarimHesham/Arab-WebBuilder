@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { NavLink, useNavigate } from "react-router-dom";
 import GoogleIcon from "@mui/icons-material/Google";
-import GitHubIcon from "@mui/icons-material/GitHub";
+// import GitHubIcon from "@mui/icons-material/GitHub";
 import {
   auth,
   registerWithEmailAndPassword,
@@ -39,7 +39,7 @@ const Register = () => {
   useEffect(() => {
     if (loading || error) return;
     if (user) navigate("/workspaces");
-  }, [user, loading]);
+  }, [user, loading, error, navigate]);
 
   const initialValues = {
     email: "",
@@ -99,19 +99,19 @@ const Register = () => {
                       data-mdb-ripple="true"
                       data-mdb-ripple-color="light"
                       onClick={() => googleRegistration()}
-                      className="inline-block p-3 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
+                      className="py-3 px-6 bg-blue-600 text-white font-medium text-sm flex items-center leading-tight uppercase rounded-md shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
                     >
-                      <GoogleIcon />
+                      <GoogleIcon className="mr-1" /> Google
                     </button>
 
-                    <button
+                    {/* <button
                       type="button"
                       data-mdb-ripple="true"
                       data-mdb-ripple-color="light"
                       className="inline-block p-3 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
                     >
                       <GitHubIcon />
-                    </button>
+                    </button> */}
                   </div>
 
                   <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">

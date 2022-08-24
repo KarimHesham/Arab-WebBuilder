@@ -5,7 +5,7 @@ import { Project } from "./features/projects";
 import Pages from "./features/pages/components/Pages";
 import Home from "./components/Home";
 import Landing from "./features/landing/components/Landing";
-import { Login, Register } from "./features/userProfile/index";
+import { Login, Register, Reset } from "./features/userProfile/index";
 import "./index.css";
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/reset" element={<Reset />} />
         <Route path="/home" element={<Landing />} />
         <Route path="/demo" element={<Editor />} />
         <Route path="/workspaces" element={<Workspaces />} />
