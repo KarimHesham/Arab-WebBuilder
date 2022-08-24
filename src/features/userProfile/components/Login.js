@@ -161,9 +161,9 @@ const Login = () => {
                         Remember me
                       </label>
                     </div>
-                    <a href="#!" className="text-gray-800">
+                    <NavLink to="/reset" className="text-gray-800">
                       Forgot password?
-                    </a>
+                    </NavLink>
                   </div>
 
                   <div className="text-center lg:text-left">
