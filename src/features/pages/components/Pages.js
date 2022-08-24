@@ -14,7 +14,7 @@ const Pages = () => {
   const [newPage, setNewPage] = useState({});
 
   useEffect(() => {
-    setPages(user.workspaces[0].projects[0].pages);
+    // setPages(user.workspaces[0].projects[0].pages);
     console.log(user.workspaces[0].projects[0].pages);
   }, [user.workspaces]);
 
