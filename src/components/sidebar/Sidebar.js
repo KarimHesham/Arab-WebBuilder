@@ -15,7 +15,7 @@ const Sidebar = () => {
   const [newWorkspace, setNewWorkspace] = useState({});
 
   useEffect(() => {
-    setWorkspaces(user.workspaces);
+    // setWorkspaces(user.workspaces);
   }, [user.workspaces]);
 
   const addWorkspace = (workspace) => {
@@ -43,7 +43,7 @@ const Sidebar = () => {
 
       <div className="w-60 mt-4 px-4 space-y-2">
         <div className="flex items-center pl-2 justify-between">
-          <h2 className="text-sm">Workspaces</h2>
+          <h2 className="text-sm font-semibold">Workspaces</h2>
           <div className="hover:bg-slate-200 p-1">
             <button
               className="cursor-pointer"

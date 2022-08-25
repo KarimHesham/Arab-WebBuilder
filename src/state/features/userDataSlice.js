@@ -2,8 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: null,
-  workspaces: null,
-  projects: null,
 };
 
 export const userPagesSlice = createSlice({

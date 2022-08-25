@@ -31,7 +31,10 @@ const Login = () => {
     console.log(email, password);
     if (email && password) {
       logInWithEmailAndPassword(email, password)
-        .then(() => "Login successful")
+        .then(() => {
+          "Login successful";
+          console.log(user);
+        })
         .catch((err) => err ?? console.log(err));
     }
   };

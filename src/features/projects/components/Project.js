@@ -14,7 +14,7 @@ const Workspace = () => {
   const [newProject, setNewProject] = useState({});
 
   useEffect(() => {
-    setProjects(user.workspaces[0].projects);
+    // setProjects(user.workspaces[0].projects);
   }, [user.workspaces]);
 
   const addProject = (project) => {
@@ -30,7 +30,7 @@ const Workspace = () => {
         <Sidebar />
 
         <div className="mt-10 space-y-4 w-full">
-          <div className="flex items-center justify-between md:pr-32">
+          <div className="flex items-center justify-between lg:pr-32">
             <div className="flex space-x-1 items-center justify-start">
               <ConstructionIcon className="h-4" />
               <h2 className="font-bold text-gray-600">Your Projects</h2>
@@ -46,9 +46,13 @@ const Workspace = () => {
           </div>
 
           <div className="flex flex-wrap">
-            {projects.map((project) => {
-              return <Project key={project.id} name={project.name} />;
-            })}
+            {projects.length > 0 ? (
+              projects.map((project) => {
+                return <Project key={project.id} name={project.name} />;
+              })
+            ) : (
+              <span>Create your first project</span>
+            )}
           </div>
           <div className="flex items-center justify-center z-50">
             {showModal ? (

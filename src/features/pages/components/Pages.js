@@ -30,7 +30,7 @@ const Pages = () => {
         <Sidebar />
 
         <div className="mt-10 space-y-4 w-full">
-          <div className="flex items-center justify-between md:pr-32">
+          <div className="flex items-center justify-between lg:pr-32">
             <div className="flex items-center space-x-1">
               <AutoStoriesIcon className="h-4" />
               <h2 className="font-bold text-gray-600">Your pages</h2>
