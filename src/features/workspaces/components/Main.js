@@ -5,11 +5,14 @@ import { useAuthState } from "react-firebase-hooks/auth";
 // import Recent from "./Recent";
 import Workspace from "./Workspace";
 import AddIcon from "@mui/icons-material/Add";
-import { addWorkspace, getWorkspaces } from "../../../services/firebase/workspaces";
+import {
+  addWorkspace,
+  getWorkspaces,
+} from "../../../services/firebase/workspaces";
 import { auth } from "../../../config/firebase/firebase";
 
 const Main = () => {
-  const userData = useSelector((state) => state.userData.user);
+  const activeUser = useSelector((state) => state.userData.user);
 
   const [user, loading, error] = useAuthState(auth);
 
@@ -24,7 +27,8 @@ const Main = () => {
   };
 
   useEffect(() => {
-  }, [user.workspaces]);
+    console.log(activeUser);
+  }, [activeUser]);
 
   return (
     <div className="mt-10 space-y-4 w-full">

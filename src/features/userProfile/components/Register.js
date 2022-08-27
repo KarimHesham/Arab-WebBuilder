@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -14,14 +14,17 @@ import GoogleIcon from "@mui/icons-material/Google";
 
 const Register = () => {
   const [user, loading, error] = useAuthState(auth);
+  const activeUser = useSelector((state) => state.userData.user);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (loading || error) return;
-    if (user) navigate("/workspaces");
-  }, [user, loading, error, navigate]);
+    if (user) {
+      navigate(`/${user.username}/workspaces`);
+    }
+  }, [user, loading, error, navigate, activeUser]);
 
   const emailRegistration = (email, password) => {
     if (email && password) {
@@ -36,7 +39,8 @@ const Register = () => {
                 username: user.email.split("@")[0],
               })
             );
-            navigate("/workspaces");
+            console.log(activeUser);
+            navigate(`/:${user.email.split("@")[0]}/workspaces`);
           }
         })
         .catch((err) => err ?? console.log(err));
@@ -55,7 +59,9 @@ const Register = () => {
               username: user.email.split("@")[0],
             })
           );
-          navigate("/workspaces");
+          console.log(activeUser);
+
+          navigate(`/:${user.email.split("@")[0]}/workspaces`);
         }
       })
       .catch((err) => console.log(err));
@@ -113,7 +119,7 @@ const Register = () => {
               <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
                 <Form>
                   <div className="flex flex-row items-center justify-center lg:justify-start">
-                    <p className="text-lg mb-0 mr-4">Sign Up with</p>
+                    <p className="text-lg mb-0 mr-4">Sign in with</p>
                     <button
                       type="button"
                       data-mdb-ripple="true"

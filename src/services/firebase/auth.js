@@ -6,7 +6,15 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import { auth } from "../../config/firebase/firebase";
 import { usersRef } from "./db";
 
@@ -16,11 +24,13 @@ const signInWithGoogle = async () => {
   try {
     const res = await signInWithPopup(auth, googleProvider);
     const user = res.user;
-    const q = query(usersRef, where("uid", "==", user.uid));
+    const newUser = doc(usersRef);
+    const q = query(usersRef, where("email", "==", user.email));
     const docs = await getDocs(q);
+
     if (docs.docs.length === 0) {
-      await addDoc(usersRef, {
-        uid: user.uid,
+      await setDoc(newUser, {
+        uid: newUser.id,
         authProvider: "google",
         email: user.email,
         username: user.email.split("@")[0],
