@@ -20,25 +20,24 @@ const Login = () => {
 
   useEffect(() => {
     if (loading || error) return;
-    if (user) navigate("/workspaces");
-  }, [user, loading, error, navigate]);
+    if (user) {
+      dispatch(
+        setUser({
+          id: user.uid,
+          email: user.email,
+          username: user.email.split("@")[0],
+        })
+      );
+      navigate(`/${user.email.split("@")[0]}/workspaces`);
+    }
+  }, [user, loading, error, navigate, dispatch]);
 
   // Login logic with Firebase
   const emailLogin = (email, password) => {
     if (email && password) {
       logInWithEmailAndPassword(email, password)
         .then(() => {
-          if (user) {
-            console.log("Login successful");
-            dispatch(
-              setUser({
-                id: user.uid,
-                email: user.email,
-                username: user.email.split("@")[0],
-              })
-            );
-            navigate("/workspaces");
-          }
+          console.log("Login successful");
         })
         .catch((err) => err ?? console.log(err));
     }
@@ -48,14 +47,6 @@ const Login = () => {
     signInWithGoogle()
       .then(() => {
         console.log("Google sign in successful");
-        dispatch(
-          setUser({
-            id: user.uid,
-            email: user.email,
-            username: user.email.split("@")[0],
-          })
-        );
-        navigate("/workspaces");
       })
       .catch((err) => err ?? console.log(err));
   };

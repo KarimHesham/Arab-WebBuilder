@@ -6,15 +6,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import {
-  addDoc,
-  collection,
-  doc,
-  getDocs,
-  query,
-  setDoc,
-  where,
-} from "firebase/firestore";
+import { doc, getDocs, query, setDoc, where } from "firebase/firestore";
 import { auth } from "../../config/firebase/firebase";
 import { usersRef } from "./db";
 
@@ -54,13 +46,19 @@ const registerWithEmailAndPassword = async (email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    await addDoc(usersRef, {
-      uid: user.uid,
-      authProvider: "local",
-      email,
-      username: user.email.split("@")[0],
-      workspaces: [],
-    });
+    const newUser = doc(usersRef);
+    const q = query(usersRef, where("email", "==", user.email));
+    const docs = await getDocs(q);
+
+    if (docs.docs.length === 0) {
+      await setDoc(newUser, {
+        uid: newUser.id,
+        authProvider: "local",
+        email: user.email,
+        username: user.email.split("@")[0],
+        workspaces: [],
+      });
+    }
   } catch (err) {
     console.error(err);
   }

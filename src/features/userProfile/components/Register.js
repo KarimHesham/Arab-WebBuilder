@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -14,7 +14,6 @@ import GoogleIcon from "@mui/icons-material/Google";
 
 const Register = () => {
   const [user, loading, error] = useAuthState(auth);
-  const activeUser = useSelector((state) => state.userData.user);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,26 +21,22 @@ const Register = () => {
   useEffect(() => {
     if (loading || error) return;
     if (user) {
-      navigate(`/${user.username}/workspaces`);
+      dispatch(
+        setUser({
+          id: user.uid,
+          email: user.email,
+          username: user.email.split("@")[0],
+        })
+      );
+      navigate(`/${user.email.split("@")[0]}/workspaces`);
     }
-  }, [user, loading, error, navigate, activeUser]);
+  }, [user, loading, error, navigate, dispatch]);
 
   const emailRegistration = (email, password) => {
     if (email && password) {
       registerWithEmailAndPassword(email, password)
         .then(() => {
-          if (user) {
-            console.log("Registration successful");
-            dispatch(
-              setUser({
-                id: user.uid,
-                email: user.email,
-                username: user.email.split("@")[0],
-              })
-            );
-            console.log(activeUser);
-            navigate(`/:${user.email.split("@")[0]}/workspaces`);
-          }
+          console.log("Registration successful");
         })
         .catch((err) => err ?? console.log(err));
     }
@@ -50,19 +45,7 @@ const Register = () => {
   const googleRegistration = () => {
     signInWithGoogle()
       .then(() => {
-        if (user) {
-          console.log("Google sign up successful");
-          dispatch(
-            setUser({
-              id: user.uid,
-              email: user.email,
-              username: user.email.split("@")[0],
-            })
-          );
-          console.log(activeUser);
-
-          navigate(`/:${user.email.split("@")[0]}/workspaces`);
-        }
+        console.log("Google sign up successful");
       })
       .catch((err) => console.log(err));
   };
