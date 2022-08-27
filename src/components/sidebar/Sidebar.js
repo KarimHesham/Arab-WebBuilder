@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+// import VisibilityIcon from "@mui/icons-material/Visibility";
 import AddIcon from "@mui/icons-material/Add";
 import Workspace from "./Workspace";
 import { useSelector } from "react-redux";
@@ -16,7 +16,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     // setWorkspaces(user.workspaces);
-  }, [user.workspaces]);
+  }, [user]);
 
   const addWorkspace = (workspace) => {
     // workspaces.push(workspace);
@@ -25,8 +25,8 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="hidden sm:flex flex-col">
-      <div className="w-60 mt-10 px-4 text-sm">
+    <div className="hidden sm:flex flex-col mt-10">
+      {/* <div className="w-60 mt-10 px-4 text-sm">
         <div className="sidebar-item">
           <VisibilityIcon className="h-4" />
           <p>Projects</p>
@@ -39,9 +39,9 @@ const Sidebar = () => {
           <VisibilityIcon className="h-4" />
           <p>Home</p>
         </div>
-      </div>
+      </div> */}
 
-      <div className="w-60 mt-4 px-4 space-y-2">
+      <div className="w-60 px-4 space-y-2">
         <div className="flex items-center pl-2 justify-between">
           <h2 className="text-sm font-semibold">Workspaces</h2>
           <div className="hover:bg-slate-200 p-1">

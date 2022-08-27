@@ -1,26 +1,29 @@
 import Workspaces from "@mui/icons-material/Workspaces";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useAuthState } from "react-firebase-hooks/auth";
 // import Recent from "./Recent";
 import Workspace from "./Workspace";
 import AddIcon from "@mui/icons-material/Add";
+import { addWorkspace, getWorkspaces } from "../../../services/firebase/workspaces";
+import { auth } from "../../../config/firebase/firebase";
 
 const Main = () => {
-  const user = useSelector((state) => state.userData.user);
+  const userData = useSelector((state) => state.userData.user);
+
+  const [user, loading, error] = useAuthState(auth);
+
   const [workspaces, setWorkspaces] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [counter, setCounter] = useState(2);
 
-  const [newPage, setNewPage] = useState({});
+  const [newWorkspace, setNewWorkspace] = useState({});
 
-  const addNewPage = (page) => {
-    setCounter(counter + 1);
+  const addNewWorkspace = (workspace) => {
+    addWorkspace(workspace);
     setShowModal(false);
   };
 
   useEffect(() => {
-    // setWorkspaces(user.workspaces);
-    console.log(workspaces);
   }, [user.workspaces]);
 
   return (
@@ -67,9 +70,9 @@ const Main = () => {
               placeholder="Enter workspace name"
               type="text"
               onChange={(e) =>
-                setNewPage({
-                  id: counter,
+                setNewWorkspace({
                   name: e.target.value,
+                  username: user.email.split("@")[0],
                   createdAt: new Date().toLocaleDateString(),
                 })
               }
@@ -84,7 +87,7 @@ const Main = () => {
               </button>
               <button
                 onClick={() => {
-                  addNewPage(newPage);
+                  addNewWorkspace(newWorkspace);
                 }}
                 className="w-16 h-6 text-xs md:text-sm bg-blue-600 rounded-md justify-center text-white hover:bg-blue-700 cursor-pointer font-semibold"
               >

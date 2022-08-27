@@ -1,39 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { NavLink, useNavigate } from "react-router-dom";
-import GoogleIcon from "@mui/icons-material/Google";
-// import GitHubIcon from "@mui/icons-material/GitHub";
 import { auth } from "../../../config/firebase/firebase";
 import {
   signInWithGoogle,
   logInWithEmailAndPassword,
 } from "../../../services/firebase/auth";
+import { setUser } from "../../../state/features/userDataSlice";
+import GoogleIcon from "@mui/icons-material/Google";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
   const [user, loading, error] = useAuthState(auth);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (loading || error) return;
-
     if (user) navigate("/workspaces");
-  });
+  }, [user, loading, error, navigate]);
 
-  const emailLogin = (values) => {
-    setEmail(values.email);
-    setPassword(values.password);
-    console.log(email, password);
+  // Login logic with Firebase
+  const emailLogin = (email, password) => {
     if (email && password) {
       logInWithEmailAndPassword(email, password)
         .then(() => {
-          "Login successful";
-          console.log(user);
+          if (user) {
+            console.log("Login successful");
+            dispatch(
+              setUser({
+                id: user.uid,
+                email: user.email,
+                username: user.email.split("@")[0],
+              })
+            );
+            navigate("/workspaces");
+          }
         })
         .catch((err) => err ?? console.log(err));
     }
@@ -41,20 +46,27 @@ const Login = () => {
 
   const googleLogin = () => {
     signInWithGoogle()
-      .then(() => console.log("Google sign in successful"))
+      .then(() => {
+        console.log("Google sign in successful");
+        dispatch(
+          setUser({
+            id: user.uid,
+            email: user.email,
+            username: user.email.split("@")[0],
+          })
+        );
+        navigate("/workspaces");
+      })
       .catch((err) => err ?? console.log(err));
   };
 
-  useEffect(() => {
-    if (loading || error) return;
-    if (user) navigate("/workspaces");
-  }, [user, loading, error, navigate]);
-
+  // Formik state
   const initialValues = {
     email: "",
     password: "",
   };
 
+  // Yup Validation for Formik
   const loginValidation = Yup.object().shape({
     email: Yup.string().email("Invalid Email").required("Email is required"),
     password: Yup.string()
@@ -68,8 +80,8 @@ const Login = () => {
         initialValues={initialValues}
         validationSchema={loginValidation}
         onSubmit={(values) => {
-          console.log("form submitted");
-          emailLogin(values);
+          console.log("Form submitted");
+          emailLogin(values.email, values.password);
         }}
       >
         <section className="h-screen">
@@ -95,15 +107,6 @@ const Login = () => {
                     >
                       <GoogleIcon className="mr-1" /> Google
                     </button>
-
-                    {/* <button
-                      type="button"
-                      data-mdb-ripple="true"
-                      data-mdb-ripple-color="light"
-                      className="inline-block p-3 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
-                    >
-                      <GitHubIcon />
-                    </button> */}
                   </div>
 
                   <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
