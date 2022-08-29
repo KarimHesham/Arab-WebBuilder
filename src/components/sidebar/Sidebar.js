@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-// import VisibilityIcon from "@mui/icons-material/Visibility";
+import React, { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import Workspace from "./Workspace";
 import { useSelector } from "react-redux";
@@ -12,10 +11,6 @@ const Sidebar = () => {
   const [showModal, setShowModal] = useState(false);
 
   const [newWorkspace, setNewWorkspace] = useState({});
-
-  useEffect(() => {
-    // setWorkspaces(user.workspaces);
-  }, [user]);
 
   const addNewWorkspace = (workspace) => {
     addWorkspace(workspace);
