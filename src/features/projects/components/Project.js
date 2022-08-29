@@ -71,16 +71,7 @@ const Workspace = () => {
             </div>
           </div>
 
-          <div className="flex flex-wrap">
-            {projects?.length > 0 ? (
-              projects.map((project) => {
-                return <Project key={project.id} name={project.name} />;
-              })
-            ) : (
-              <span>Create your first project</span>
-            )}
-          </div>
-          <div className="flex items-center justify-center z-50">
+          <div className="flex items-center justify-end z-50">
             {showModal ? (
               <div className="w-64 h-32 rounded-md bg-gray border-2 p-2 flex flex-col justify-between shadow-md">
                 <div className="space-y-1">
@@ -116,6 +107,16 @@ const Workspace = () => {
                 </div>
               </div>
             ) : null}
+          </div>
+
+          <div className="flex flex-wrap">
+            {projects?.length > 0 ? (
+              projects.map((project) => {
+                return <Project key={project.id} name={project.name} />;
+              })
+            ) : (
+              <span>Create your first project</span>
+            )}
           </div>
         </div>
       </div>
