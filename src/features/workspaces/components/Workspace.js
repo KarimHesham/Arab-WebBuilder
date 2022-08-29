@@ -1,8 +1,23 @@
 import React from "react";
 import { Project } from "../../../components/index";
-import GamepadIcon from "@mui/icons-material/Gamepad";
+import ViewModuleIcon from "@mui/icons-material/ViewModule";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveWorkspace } from "../../../state/features/workspacesDataSlice";
 
 const Workspace = ({ id, name, projects }) => {
+  const activeUser = useSelector((state) => state.userData.user);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const openWorkspace = () => {
+    console.log(id, name);
+    dispatch(setActiveWorkspace(id));
+    navigate(`/${activeUser.username}/${name}`);
+  };
+
   return (
     <div className="space-y-4">
       <div className="flex flex-col md:flex-row justify-between md:space-x-16 space-y-2">
@@ -13,28 +28,20 @@ const Workspace = ({ id, name, projects }) => {
           <h2 className="font-bold">{name}</h2>
         </div>
         <div className="flex items-center flex-wrap">
-          <div className="workspace-button">
-            <GamepadIcon className="h-4" />
-            <p>Button</p>
-          </div>
-          <div className="workspace-button">
-            <GamepadIcon className="h-4" />
-            <p>Button</p>
-          </div>
-          <div className="workspace-button">
-            <GamepadIcon className="h-4" />
-            <p>Button</p>
-          </div>
-          <div className="workspace-button">
-            <GamepadIcon className="h-4" />
-            <p>Button</p>
-          </div>
+          <button onClick={() => openWorkspace()} className="workspace-button">
+            <ViewModuleIcon className="h-4" />
+            <p>Projects</p>
+          </button>
+          <button className="workspace-button text-red-600">
+            <DeleteIcon className="h-4" />
+            <p>Delete</p>
+          </button>
         </div>
       </div>
       <div className="card-container">
-        {projects?.length > 0
-          ? projects.map((project) => {
-              return <Project key={project.id} name={project.name} />;
+        {projects.length > 0
+          ? projects?.map((project) => {
+              return <Project key={project.uid} id={project.uid} name={project.name} />;
             })
           : "Create your first project"}
       </div>

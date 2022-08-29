@@ -2,7 +2,6 @@ import Workspaces from "@mui/icons-material/Workspaces";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
-// import Recent from "./Recent";
 import Workspace from "./Workspace";
 import AddIcon from "@mui/icons-material/Add";
 import {
@@ -24,8 +23,24 @@ const Main = () => {
 
   const dispatch = useDispatch();
 
+  const getUserWorkspaces = (username) => {
+    getWorkspaces(username)
+      .then((data) => {
+        if (user) {
+          dispatch(setUserWorkspaces(data));
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   const addNewWorkspace = (workspace) => {
-    addWorkspace(workspace);
+    addWorkspace(workspace)
+      .then(() => {
+        getUserWorkspaces(activeUser.username);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     setShowModal(false);
   };
 
@@ -37,7 +52,6 @@ const Main = () => {
         if (user) {
           dispatch(setUserWorkspaces(data));
         }
-        // setWorkspaces(data);
       })
       .catch((err) => console.log(err));
   }, [activeUser, user, dispatch, loading, error]);
@@ -59,21 +73,7 @@ const Main = () => {
         </div>
       </div>
 
-      <div className="space-y-8">
-        {workspaces.length > 0
-          ? workspaces.map((workspace) => {
-              return (
-                <Workspace
-                  key={workspace.uid}
-                  name={workspace.name}
-                  projects={workspace.projects}
-                />
-              );
-            })
-          : "Create your first workspace"}
-      </div>
-
-      <div className="flex items-center justify-center z-50">
+      <div className="flex items-center justify-end z-50">
         {showModal ? (
           <div className="w-64 h-32 rounded-md bg-gray border-2 p-2 flex flex-col justify-between shadow-md">
             <div className="space-y-1">
@@ -112,6 +112,21 @@ const Main = () => {
             </div>
           </div>
         ) : null}
+      </div>
+
+      <div className="space-y-8">
+        {workspaces.length > 0
+          ? workspaces.map((workspace) => {
+              return (
+                <Workspace
+                  key={workspace.uid}
+                  id={workspace.uid}
+                  name={workspace.name}
+                  projects={workspace.projects}
+                />
+              );
+            })
+          : "Create your first workspace"}
       </div>
     </div>
   );

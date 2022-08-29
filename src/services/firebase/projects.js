@@ -19,10 +19,7 @@ const addProject = async (project) => {
       ...project,
       pages: [],
     }).then(async () => {
-      const q = query(
-        workspacesRef,
-        where("workspaceId", "==", project.workspaceId)
-      );
+      const q = query(workspacesRef, where("uid", "==", project.workspaceId));
       const result = await getDocs(q);
       if (result.docs.length > 0) {
         const workspaceDoc = doc(db, "workspaces", result.docs[0].id);
@@ -51,9 +48,11 @@ const getProjects = async (workspaceId) => {
 
     const querySnapshot = await getDocs(q);
 
-    querySnapshot.forEach((doc) => {
-      projects.push(doc.data());
-    });
+    if (querySnapshot.docs.length > 0) {
+      querySnapshot.forEach((doc) => {
+        projects.push(doc.data());
+      });
+    }
 
     console.log(projects);
     return projects;

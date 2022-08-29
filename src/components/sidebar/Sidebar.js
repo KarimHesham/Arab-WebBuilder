@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import Workspace from "./Workspace";
+import {
+  addWorkspace,
+  getWorkspaces,
+} from "../../services/firebase/workspaces";
 import { useSelector } from "react-redux";
-import { addWorkspace } from "../../services/firebase/workspaces";
 
 const Sidebar = () => {
-  const user = useSelector((state) => state.userData.user);
+  const activeUser = useSelector((state) => state.userData.user);
   const workspaces = useSelector((state) => state.workspacesData.workspaces);
 
   const [showModal, setShowModal] = useState(false);
@@ -13,7 +16,11 @@ const Sidebar = () => {
   const [newWorkspace, setNewWorkspace] = useState({});
 
   const addNewWorkspace = (workspace) => {
-    addWorkspace(workspace);
+    addWorkspace(workspace)
+      .then(() => {
+        getWorkspaces(activeUser.username);
+      })
+      .catch((err) => console.log(err));
     setShowModal(false);
   };
 
@@ -62,7 +69,7 @@ const Sidebar = () => {
                 onChange={(e) =>
                   setNewWorkspace({
                     name: e.target.value,
-                    username: user.email.split("@")[0],
+                    username: activeUser.username,
                     createdAt: new Date().toLocaleDateString(),
                   })
                 }
@@ -88,8 +95,14 @@ const Sidebar = () => {
 
         <div className="space-y-2">
           {workspaces.length > 0 ? (
-            workspaces.map((workspace) => {
-              return <Workspace key={workspace.uid} name={workspace.name} />;
+            workspaces?.map((workspace) => {
+              return (
+                <Workspace
+                  key={workspace.uid}
+                  id={workspace.uid}
+                  name={workspace.name}
+                />
+              );
             })
           ) : (
             <p className="text-sm pl-2">Create your first workspace</p>

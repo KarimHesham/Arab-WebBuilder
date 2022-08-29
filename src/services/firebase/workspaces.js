@@ -48,9 +48,11 @@ const getWorkspaces = async (username) => {
 
     const querySnapshot = await getDocs(q);
 
-    querySnapshot.forEach((doc) => {
-      workspaces.push(doc.data());
-    });
+    if (querySnapshot.docs.length > 0) {
+      querySnapshot.forEach((doc) => {
+        workspaces.push(doc.data());
+      });
+    }
 
     console.log(workspaces);
     return workspaces;

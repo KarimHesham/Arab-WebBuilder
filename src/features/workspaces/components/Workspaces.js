@@ -7,7 +7,7 @@ const Workspaces = () => {
   return (
     <>
       <Navbar />
-      <div className="flex md:px-36">
+      <div className="flex px-4 md:px-36">
         <Sidebar />
         <Main />
       </div>

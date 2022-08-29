@@ -1,25 +1,51 @@
 import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Project, Navbar, Sidebar } from "../../../components";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import AddIcon from "@mui/icons-material/Add";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { auth } from "../../../config/firebase/firebase";
+import { addProject, getProjects } from "../../../services/firebase/projects";
+import { setUserProjects } from "../../../state/features/projectsDataSlice";
 
 const Workspace = () => {
-  const user = useSelector((state) => state.userData.user);
-  const [projects, setProjects] = useState([]);
+  const [user, loading, error] = useAuthState(auth);
+
+  const projects = useSelector((state) => state.projectsData.projects);
+  const activeWorkspace = useSelector(
+    (state) => state.workspacesData.activeWorkspace
+  );
 
   const [showModal, setShowModal] = useState(false);
-  const [counter, setCounter] = useState(2);
 
   const [newProject, setNewProject] = useState({});
 
-  useEffect(() => {
-    // setProjects(user.workspaces[0].projects);
-  }, [user.workspaces]);
+  const dispatch = useDispatch();
 
-  const addProject = (project) => {
-    // workspace.projects.push(project);
-    setCounter(counter + 1);
+  useEffect(() => {
+    if (loading || error) return;
+
+    getProjects(activeWorkspace)
+      .then((data) => {
+        if (user) {
+          dispatch(setUserProjects(data));
+        }
+      })
+      .catch((err) => console.log(err));
+  }, [user, loading, error, activeWorkspace, dispatch]);
+
+  const getUserProjects = (workspaceId) => {
+    getProjects(workspaceId)
+      .then((data) => {
+        dispatch(setUserProjects(data));
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const addNewProject = (project) => {
+    addProject(project).then(() => {
+      getUserProjects(activeWorkspace);
+    });
     setShowModal(false);
   };
 
@@ -46,7 +72,7 @@ const Workspace = () => {
           </div>
 
           <div className="flex flex-wrap">
-            {projects.length > 0 ? (
+            {projects?.length > 0 ? (
               projects.map((project) => {
                 return <Project key={project.id} name={project.name} />;
               })
@@ -67,7 +93,11 @@ const Workspace = () => {
                   placeholder="Enter project name"
                   type="text"
                   onChange={(e) =>
-                    setNewProject({ id: counter, name: e.target.value })
+                    setNewProject({
+                      name: e.target.value,
+                      workspaceId: activeWorkspace,
+                      createdAt: new Date().toLocaleDateString(),
+                    })
                   }
                 />
                 <div className="flex space-x-1 justify-end">
@@ -78,7 +108,7 @@ const Workspace = () => {
                     Cancel
                   </button>
                   <button
-                    onClick={() => addProject(newProject)}
+                    onClick={() => addNewProject(newProject)}
                     className="w-16 h-6 text-xs md:text-sm bg-blue-600 rounded-md justify-center text-white hover:bg-blue-700 cursor-pointer font-semibold"
                   >
                     Add
