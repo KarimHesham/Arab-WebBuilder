@@ -14,7 +14,7 @@ import { setUserWorkspaces } from "../../../state/features/workspacesDataSlice";
 
 const Main = () => {
   const activeUser = useSelector((state) => state.userData.user);
-  const workspaces = useSelector((state) => state.workspaceData.workspaces);
+  const workspaces = useSelector((state) => state.workspacesData.workspaces);
 
   const [user, loading, error] = useAuthState(auth);
 

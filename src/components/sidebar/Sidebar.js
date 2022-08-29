@@ -6,7 +6,7 @@ import { addWorkspace } from "../../services/firebase/workspaces";
 
 const Sidebar = () => {
   const user = useSelector((state) => state.userData.user);
-  const workspaces = useSelector((state) => state.workspaceData.workspaces);
+  const workspaces = useSelector((state) => state.workspacesData.workspaces);
 
   const [showModal, setShowModal] = useState(false);
 

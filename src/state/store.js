@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userDataReducer from "./features/userDataSlice";
-import workspaceDataReducer from "./features/workspacesDataSlice";
+import workspacesDataReducer from "./features/workspacesDataSlice";
+import projectsDataReducer from "./features/projectsDataSlice";
 
 export default configureStore({
   reducer: {
     userData: userDataReducer,
-    workspaceData: workspaceDataReducer,
+    workspacesData: workspacesDataReducer,
+    projectsData: projectsDataReducer,
   },
 });

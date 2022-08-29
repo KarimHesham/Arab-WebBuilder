@@ -6,7 +6,7 @@ const initialState = {
 };
 
 export const workspacesSlice = createSlice({
-  name: "workspace",
+  name: "workspaces",
   initialState,
   reducers: {
     setUserWorkspaces: (state, action) => {
