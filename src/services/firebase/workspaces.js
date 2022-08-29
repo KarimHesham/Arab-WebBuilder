@@ -4,7 +4,6 @@ import {
   getDocs,
   orderBy,
   query,
-  serverTimestamp,
   setDoc,
   updateDoc,
   where,
@@ -19,7 +18,6 @@ const addWorkspace = async (workspace) => {
       uid: newWorkspace.id,
       ...workspace,
       projects: [],
-      timestamp: serverTimestamp(),
     }).then(async () => {
       const q = query(usersRef, where("username", "==", workspace.username));
       const result = await getDocs(q);
@@ -39,18 +37,23 @@ const addWorkspace = async (workspace) => {
 };
 
 const getWorkspaces = async (username) => {
+  const workspaces = [];
+
   try {
     const q = query(
       workspacesRef,
       where("username", "==", username),
-      orderBy("timestamp", "desc")
+      orderBy("createdAt", "desc")
     );
 
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => {
-      console.log(doc.id);
+      workspaces.push(doc.data());
     });
+
+    console.log(workspaces);
+    return workspaces;
   } catch (err) {
     console.log(err);
   }

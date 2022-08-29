@@ -9,7 +9,7 @@ export const workspacesSlice = createSlice({
   name: "workspace",
   initialState,
   reducers: {
-    setWorkspaces: (state, action) => {
+    setUserWorkspaces: (state, action) => {
       state.workspaces = action.payload;
     },
     setActiveWorkspace: (state, action) => {
@@ -19,6 +19,7 @@ export const workspacesSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setWorkspaces, setActiveWorkspace } = workspacesSlice.actions;
+export const { setUserWorkspaces, setActiveWorkspace } =
+  workspacesSlice.actions;
 
 export default workspacesSlice.reducer;

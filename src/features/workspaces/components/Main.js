@@ -1,6 +1,6 @@
 import Workspaces from "@mui/icons-material/Workspaces";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 // import Recent from "./Recent";
 import Workspace from "./Workspace";
@@ -10,16 +10,19 @@ import {
   getWorkspaces,
 } from "../../../services/firebase/workspaces";
 import { auth } from "../../../config/firebase/firebase";
+import { setUserWorkspaces } from "../../../state/features/workspacesDataSlice";
 
 const Main = () => {
   const activeUser = useSelector((state) => state.userData.user);
+  const workspaces = useSelector((state) => state.workspaceData.workspaces);
 
   const [user, loading, error] = useAuthState(auth);
 
-  const [workspaces, setWorkspaces] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const [newWorkspace, setNewWorkspace] = useState({});
+
+  const dispatch = useDispatch();
 
   const addNewWorkspace = (workspace) => {
     addWorkspace(workspace);
@@ -27,8 +30,17 @@ const Main = () => {
   };
 
   useEffect(() => {
-    console.log(activeUser);
-  }, [activeUser]);
+    if (loading || error) return;
+
+    getWorkspaces(activeUser.username)
+      .then((data) => {
+        if (user) {
+          dispatch(setUserWorkspaces(data));
+        }
+        // setWorkspaces(data);
+      })
+      .catch((err) => console.log(err));
+  }, [activeUser, user, dispatch, loading, error]);
 
   return (
     <div className="mt-10 space-y-4 w-full">
@@ -47,12 +59,12 @@ const Main = () => {
         </div>
       </div>
 
-      <div className="">
+      <div className="space-y-8">
         {workspaces.length > 0
           ? workspaces.map((workspace) => {
               return (
                 <Workspace
-                  key={workspace.id}
+                  key={workspace.uid}
                   name={workspace.name}
                   projects={workspace.projects}
                 />

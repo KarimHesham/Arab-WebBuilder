@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -11,9 +11,11 @@ import {
 } from "../../../services/firebase/auth";
 import { setUser } from "../../../state/features/userDataSlice";
 import GoogleIcon from "@mui/icons-material/Google";
+import { getWorkspaces } from "../../../services/firebase/workspaces";
 
 const Login = () => {
   const [user, loading, error] = useAuthState(auth);
+  const activeUser = useSelector((state) => state.userData.user);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -37,7 +39,10 @@ const Login = () => {
     if (email && password) {
       logInWithEmailAndPassword(email, password)
         .then(() => {
-          console.log("Login successful");
+          if (user) {
+            console.log("Login successful");
+            console.log(getWorkspaces(activeUser.username));
+          }
         })
         .catch((err) => err ?? console.log(err));
     }
@@ -46,7 +51,10 @@ const Login = () => {
   const googleLogin = () => {
     signInWithGoogle()
       .then(() => {
-        console.log("Google sign in successful");
+        if (user) {
+          console.log("Google sign in successful");
+          console.log(getWorkspaces(activeUser.username));
+        }
       })
       .catch((err) => err ?? console.log(err));
   };
