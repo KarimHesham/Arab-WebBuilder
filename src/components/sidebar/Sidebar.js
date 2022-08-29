@@ -3,14 +3,13 @@ import React, { useState, useEffect } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import Workspace from "./Workspace";
 import { useSelector } from "react-redux";
+import { addWorkspace } from "../../services/firebase/workspaces";
 
 const Sidebar = () => {
   const user = useSelector((state) => state.userData.user);
-
-  const [workspaces, setWorkspaces] = useState([]);
+  const workspaces = useSelector((state) => state.workspaceData.workspaces);
 
   const [showModal, setShowModal] = useState(false);
-  const [counter, setCounter] = useState(5);
 
   const [newWorkspace, setNewWorkspace] = useState({});
 
@@ -18,9 +17,8 @@ const Sidebar = () => {
     // setWorkspaces(user.workspaces);
   }, [user]);
 
-  const addWorkspace = (workspace) => {
-    // workspaces.push(workspace);
-    setCounter(counter + 1);
+  const addNewWorkspace = (workspace) => {
+    addWorkspace(workspace);
     setShowModal(false);
   };
 
@@ -68,8 +66,9 @@ const Sidebar = () => {
                 type="text"
                 onChange={(e) =>
                   setNewWorkspace({
-                    id: counter,
                     name: e.target.value,
+                    username: user.email.split("@")[0],
+                    createdAt: new Date().toLocaleDateString(),
                   })
                 }
               />
@@ -82,7 +81,7 @@ const Sidebar = () => {
                   Cancel
                 </button>
                 <button
-                  onClick={() => addWorkspace(newWorkspace)}
+                  onClick={() => addNewWorkspace(newWorkspace)}
                   className="w-16 h-6 text-xs md:text-sm bg-blue-600 rounded-md justify-center text-white hover:bg-blue-700 cursor-pointer font-semibold"
                 >
                   Add
@@ -95,7 +94,7 @@ const Sidebar = () => {
         <div className="space-y-2">
           {workspaces.length > 0 ? (
             workspaces.map((workspace) => {
-              return <Workspace key={workspace.id} name={workspace.name} />;
+              return <Workspace key={workspace.uid} name={workspace.name} />;
             })
           ) : (
             <p className="text-sm pl-2">Create your first workspace</p>
