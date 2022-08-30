@@ -2,6 +2,7 @@ import {
   arrayUnion,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   orderBy,
   query,
@@ -32,6 +33,18 @@ const getProjects = async (workspaceId) => {
 
     console.log(projects);
     return projects;
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getProject = async (id) => {
+  try {
+    const docRef = doc(db, "projects", id);
+
+    const docSnapshot = await getDoc(docRef);
+    if (docSnapshot.exists()) {
+      return docSnapshot.data();
+    }
   } catch (err) {
     console.log(err);
   }
@@ -72,4 +85,4 @@ const deleteProject = async (id) => {
   }
 };
 
-export { addProject, getProjects, deleteProject };
+export { addProject, getProjects, deleteProject, getProject };

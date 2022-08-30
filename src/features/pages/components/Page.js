@@ -13,10 +13,10 @@ const Page = ({ id, name, created }) => {
         <p className="text-xs text-gray-500">{created}</p>
         <div className="flex items-center justify-end space-x-1">
           <div>
-            <EditIcon className="text-blue-700 hover:scale-125" />
+            <EditIcon className="text-blue-700 hover:scale-110" />
           </div>
           <div>
-            <DeleteIcon className="text-red-500 hover:scale-125" />
+            <DeleteIcon className="text-red-500 hover:scale-110" />
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@ const Workspace = ({ id, name }) => {
   const dispatch = useDispatch();
 
   const openWorkspace = () => {
-    dispatch(setActiveWorkspace(id));
+    dispatch(setActiveWorkspace({ id, name }));
     navigate(`/${activeUser.username}/${name}`);
   };
   return (

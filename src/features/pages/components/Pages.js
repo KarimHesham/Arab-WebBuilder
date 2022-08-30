@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Navbar, Sidebar } from "../../../components";
 import Page from "./Page";
@@ -6,20 +6,15 @@ import AddIcon from "@mui/icons-material/Add";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 
 const Pages = () => {
-  const user = useSelector((state) => state.userData.user);
-  const [pages, setPages] = useState([]);
+  const activeProject = useSelector(
+    (state) => state.projectsData.activeProject
+  );
+
   const [showModal, setShowModal] = useState(false);
-  const [counter, setCounter] = useState(2);
 
   const [newPage, setNewPage] = useState({});
 
-  useEffect(() => {
-    // setPages(user.workspaces[0].projects[0].pages);
-    console.log(user.workspaces[0].projects[0].pages);
-  }, [user.workspaces]);
-
   const addNewPage = (page) => {
-    setCounter(counter + 1);
     setShowModal(false);
   };
 
@@ -46,8 +41,8 @@ const Pages = () => {
           </div>
 
           <div className="">
-            {pages.length > 0
-              ? pages.map((page) => {
+            {activeProject.pages?.length > 0
+              ? activeProject.pages.map((page) => {
                   return (
                     <Page
                       key={page.id}
@@ -73,7 +68,6 @@ const Pages = () => {
                   type="text"
                   onChange={(e) =>
                     setNewPage({
-                      id: counter,
                       name: e.target.value,
                       createdAt: new Date().toLocaleDateString(),
                     })

@@ -47,13 +47,7 @@ const Main = () => {
   useEffect(() => {
     if (loading || error) return;
 
-    getWorkspaces(activeUser.username)
-      .then((data) => {
-        if (user) {
-          dispatch(setUserWorkspaces(data));
-        }
-      })
-      .catch((err) => console.log(err));
+    getUserWorkspaces(activeUser.username);
   }, [activeUser, user, dispatch, loading, error]);
 
   return (

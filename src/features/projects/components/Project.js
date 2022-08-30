@@ -22,18 +22,6 @@ const Workspace = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (loading || error) return;
-
-    getProjects(activeWorkspace)
-      .then((data) => {
-        if (user) {
-          dispatch(setUserProjects(data));
-        }
-      })
-      .catch((err) => console.log(err));
-  }, [user, loading, error, activeWorkspace, dispatch]);
-
   const getUserProjects = (workspaceId) => {
     getProjects(workspaceId)
       .then((data) => {
@@ -48,6 +36,12 @@ const Workspace = () => {
     });
     setShowModal(false);
   };
+
+  useEffect(() => {
+    if (loading || error) return;
+
+    getUserProjects(activeWorkspace);
+  }, [user, loading, error, activeWorkspace, dispatch]);
 
   return (
     <div>
@@ -112,7 +106,14 @@ const Workspace = () => {
           <div className="flex flex-wrap">
             {projects?.length > 0 ? (
               projects.map((project) => {
-                return <Project key={project.id} name={project.name} />;
+                return (
+                  <Project
+                    key={project.uid}
+                    id={project.uid}
+                    name={project.name}
+                    workspaceName={activeWorkspace.name}
+                  />
+                );
               })
             ) : (
               <span>Create your first project</span>
