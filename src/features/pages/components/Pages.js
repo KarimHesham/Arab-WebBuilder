@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Navbar, Sidebar } from "../../../components";
 import Page from "./Page";
 import AddIcon from "@mui/icons-material/Add";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
+import { addPage, getPages } from "../../../services/firebase/pages";
+import { setUserPages } from "../../../state/features/pagesDataSlice";
 
 const Pages = () => {
   const activeProject = useSelector(
@@ -14,7 +16,26 @@ const Pages = () => {
 
   const [newPage, setNewPage] = useState({});
 
+  const dispatch = useDispatch();
+
+  const getUserPages = (projectId) => {
+    getPages(projectId)
+      .then((data) => {
+        dispatch(setUserPages(data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const addNewPage = (page) => {
+    addPage(page)
+      .then(() => {
+        getUserPages(activeProject.uid);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     setShowModal(false);
   };
 
@@ -40,21 +61,7 @@ const Pages = () => {
             </div>
           </div>
 
-          <div className="">
-            {activeProject.pages?.length > 0
-              ? activeProject.pages.map((page) => {
-                  return (
-                    <Page
-                      key={page.id}
-                      name={page.name}
-                      created={page.createdAt}
-                    />
-                  );
-                })
-              : "Create your first page"}
-          </div>
-
-          <div className="flex items-center justify-center z-50">
+          <div className="flex items-center justify-end z-50">
             {showModal ? (
               <div className="w-64 h-32 rounded-md bg-gray border-2 p-2 flex flex-col justify-between shadow-md">
                 <div className="space-y-1">
@@ -92,6 +99,20 @@ const Pages = () => {
                 </div>
               </div>
             ) : null}
+          </div>
+
+          <div className="">
+            {activeProject.pages?.length > 0
+              ? activeProject.pages.map((page) => {
+                  return (
+                    <Page
+                      key={page.id}
+                      name={page.name}
+                      created={page.createdAt}
+                    />
+                  );
+                })
+              : "Create your first page"}
           </div>
         </div>
       </div>

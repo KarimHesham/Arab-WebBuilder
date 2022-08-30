@@ -30,7 +30,6 @@ const getWorkspaces = async (username) => {
       });
     }
 
-    console.log(workspaces);
     return workspaces;
   } catch (err) {
     console.log(err);
@@ -65,7 +64,7 @@ const addWorkspace = async (workspace) => {
 const deleteWorkspace = async (id) => {
   try {
     await deleteDoc(doc(db, "workspaces", id)).then(() => {
-      console.log("Workspaces deleted successfully");
+      console.log("Workspace deleted successfully");
     });
   } catch (err) {
     console.log(err);

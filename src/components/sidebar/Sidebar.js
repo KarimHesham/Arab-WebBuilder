@@ -1,24 +1,39 @@
 import React, { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import Workspace from "./Workspace";
+import { useAuthState } from "react-firebase-hooks/auth";
 import {
   addWorkspace,
   getWorkspaces,
 } from "../../services/firebase/workspaces";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserWorkspaces } from "../../state/features/workspacesDataSlice";
+import { auth } from "../../config/firebase/firebase";
 
 const Sidebar = () => {
   const activeUser = useSelector((state) => state.userData.user);
   const workspaces = useSelector((state) => state.workspacesData.workspaces);
+  const [user] = useAuthState(auth);
 
   const [showModal, setShowModal] = useState(false);
 
+  const dispatch = useDispatch();
+
   const [newWorkspace, setNewWorkspace] = useState({});
+  const getUserWorkspaces = (username) => {
+    getWorkspaces(username)
+      .then((data) => {
+        if (user) {
+          dispatch(setUserWorkspaces(data));
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   const addNewWorkspace = (workspace) => {
     addWorkspace(workspace)
       .then(() => {
-        getWorkspaces(activeUser.username);
+        getUserWorkspaces(activeUser.username);
       })
       .catch((err) => console.log(err));
     setShowModal(false);

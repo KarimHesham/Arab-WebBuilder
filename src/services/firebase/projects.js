@@ -43,6 +43,7 @@ const getProject = async (id) => {
 
     const docSnapshot = await getDoc(docRef);
     if (docSnapshot.exists()) {
+      console.log(docSnapshot.data());
       return docSnapshot.data();
     }
   } catch (err) {

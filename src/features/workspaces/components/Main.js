@@ -12,10 +12,10 @@ import { auth } from "../../../config/firebase/firebase";
 import { setUserWorkspaces } from "../../../state/features/workspacesDataSlice";
 
 const Main = () => {
+  const [user, loading, error] = useAuthState(auth);
+
   const activeUser = useSelector((state) => state.userData.user);
   const workspaces = useSelector((state) => state.workspacesData.workspaces);
-
-  const [user, loading, error] = useAuthState(auth);
 
   const [showModal, setShowModal] = useState(false);
 

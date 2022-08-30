@@ -7,11 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../../../config/firebase/firebase";
 import { addProject, getProjects } from "../../../services/firebase/projects";
 import { setUserProjects } from "../../../state/features/projectsDataSlice";
+import { getWorkspaces } from "../../../services/firebase/workspaces";
+import { setUserWorkspaces } from "../../../state/features/workspacesDataSlice";
 
 const Workspace = () => {
   const [user, loading, error] = useAuthState(auth);
 
   const projects = useSelector((state) => state.projectsData.projects);
+
   const activeWorkspace = useSelector(
     (state) => state.workspacesData.activeWorkspace
   );
@@ -23,8 +26,11 @@ const Workspace = () => {
   const dispatch = useDispatch();
 
   const getUserProjects = (workspaceId) => {
+    console.log(activeWorkspace.uid);
+
     getProjects(workspaceId)
       .then((data) => {
+        console.log(data);
         dispatch(setUserProjects(data));
       })
       .catch((err) => console.log(err));
@@ -32,7 +38,7 @@ const Workspace = () => {
 
   const addNewProject = (project) => {
     addProject(project).then(() => {
-      getUserProjects(activeWorkspace);
+      getUserProjects(activeWorkspace.uid);
     });
     setShowModal(false);
   };
@@ -40,8 +46,8 @@ const Workspace = () => {
   useEffect(() => {
     if (loading || error) return;
 
-    getUserProjects(activeWorkspace);
-  }, [user, loading, error, activeWorkspace, dispatch]);
+    getUserProjects(activeWorkspace.uid);
+  }, [user, activeWorkspace, dispatch, loading, error]);
 
   return (
     <div>
@@ -80,7 +86,7 @@ const Workspace = () => {
                   onChange={(e) =>
                     setNewProject({
                       name: e.target.value,
-                      workspaceId: activeWorkspace,
+                      workspaceId: activeWorkspace.uid,
                       createdAt: new Date().toLocaleDateString(),
                     })
                   }
@@ -104,8 +110,8 @@ const Workspace = () => {
           </div>
 
           <div className="flex flex-wrap">
-            {projects?.length > 0 ? (
-              projects.map((project) => {
+            {projects.length > 0 ? (
+              projects?.map((project) => {
                 return (
                   <Project
                     key={project.uid}

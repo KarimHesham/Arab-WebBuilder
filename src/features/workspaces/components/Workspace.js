@@ -36,8 +36,7 @@ const Workspace = ({ id, name, projects }) => {
   };
 
   const openWorkspace = () => {
-    console.log(id, name);
-    dispatch(setActiveWorkspace({ id, name }));
+    dispatch(setActiveWorkspace({ uid: id, name, projects }));
     navigate(`/${activeUser.username}/${name}`);
   };
 
