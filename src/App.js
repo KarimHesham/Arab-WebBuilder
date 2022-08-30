@@ -20,7 +20,10 @@ function App() {
         <Route path="/demo" element={<Editor />} />
         <Route path="/:username/workspaces" element={<Workspaces />} />
         <Route path="/:username/:workspaceName" element={<Project />} />
-        <Route path="/pages" element={<Pages />} />
+        <Route
+          path="/:username/:workspaceName/:projectName"
+          element={<Pages />}
+        />
       </Routes>
     </Router>
   );
