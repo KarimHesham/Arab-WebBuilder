@@ -40,8 +40,8 @@ const Workspace = ({ id, name, projects }) => {
     navigate(`/${activeUser.username}/${name}`);
   };
 
-  const deleteUserWorkspace = (id) => {
-    deleteWorkspace(id)
+  const deleteUserWorkspace = (id, name, username) => {
+    deleteWorkspace(id, name, username)
       .then(() => {
         getUserWorkspaces(activeUser.username);
       })
@@ -87,7 +87,7 @@ const Workspace = ({ id, name, projects }) => {
               </button>
               <button
                 onClick={() => {
-                  deleteUserWorkspace(id);
+                  deleteUserWorkspace(id, name, activeUser.username);
                 }}
                 className="w-16 h-6 text-xs md:text-sm bg-red-600 rounded-md justify-center text-white hover:bg-red-700 cursor-pointer font-semibold"
               >

@@ -1,4 +1,5 @@
 import {
+  arrayRemove,
   arrayUnion,
   deleteDoc,
   doc,
@@ -76,10 +77,21 @@ const addProject = async (project) => {
   }
 };
 
-const deleteProject = async (id) => {
+const deleteProject = async (id, name, workspaceId) => {
   try {
-    await deleteDoc(doc(db, "projects", id)).then(() => {
-      console.log("Project deleted successfully");
+    await deleteDoc(doc(db, "projects", id)).then(async () => {
+      const q = query(workspacesRef, where("uid", "==", workspaceId));
+      const result = await getDocs(q);
+      if (result.docs.length > 0) {
+        const workspaceDoc = doc(db, "workspaces", result.docs[0].id);
+        updateDoc(workspaceDoc, {
+          projects: arrayRemove({
+            uid: id,
+            name: name,
+          }),
+        });
+      }
+      console.log("Project deleted");
     });
   } catch (err) {
     console.log(err);

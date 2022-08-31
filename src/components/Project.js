@@ -12,8 +12,14 @@ import {
   getProject,
   getProjects,
 } from "../services/firebase/projects";
+import { getWorkspaces } from "../services/firebase/workspaces";
+import { setUserWorkspaces } from "../state/features/workspacesDataSlice";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../config/firebase/firebase";
 
 const Project = ({ id, name, workspaceName }) => {
+  const [user] = useAuthState(auth);
+
   const activeUser = useSelector((state) => state.userData.user);
   const activeWorkspace = useSelector(
     (state) => state.workspacesData.activeWorkspace
@@ -23,6 +29,16 @@ const Project = ({ id, name, workspaceName }) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const getUserWorkspaces = (username) => {
+    getWorkspaces(username)
+      .then((data) => {
+        if (user) {
+          dispatch(setUserWorkspaces(data));
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   const getUserProjects = (workspaceId) => {
     console.log(activeWorkspace.uid);
@@ -49,9 +65,10 @@ const Project = ({ id, name, workspaceName }) => {
       });
   };
 
-  const deleteUserProject = (id) => {
-    deleteProject(id)
+  const deleteUserProject = (id, name, workspaceId) => {
+    deleteProject(id, name, workspaceId)
       .then(() => {
+        getUserWorkspaces(activeUser.username);
         getUserProjects(activeWorkspace.uid);
       })
       .catch((err) => {
@@ -87,7 +104,7 @@ const Project = ({ id, name, workspaceName }) => {
               </button>
               <button
                 onClick={() => {
-                  deleteUserProject(id);
+                  deleteUserProject(id, name, activeWorkspace.uid);
                 }}
                 className="w-16 h-6 text-xs md:text-sm bg-red-600 rounded-md justify-center text-white hover:bg-red-700 cursor-pointer font-semibold"
               >

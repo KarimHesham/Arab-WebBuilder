@@ -8,6 +8,7 @@ import {
   updateDoc,
   where,
   deleteDoc,
+  arrayRemove,
 } from "firebase/firestore";
 import { db } from "../../config/firebase/firebase";
 import { usersRef, workspacesRef } from "./db";
@@ -61,10 +62,21 @@ const addWorkspace = async (workspace) => {
   }
 };
 
-const deleteWorkspace = async (id) => {
+const deleteWorkspace = async (id, name, username) => {
   try {
-    await deleteDoc(doc(db, "workspaces", id)).then(() => {
-      console.log("Workspace deleted successfully");
+    await deleteDoc(doc(db, "workspaces", id)).then(async () => {
+      const q = query(usersRef, where("username", "==", username));
+      const result = await getDocs(q);
+      if (result.docs.length > 0) {
+        const userDoc = doc(db, "users", result.docs[0].id);
+        updateDoc(userDoc, {
+          workspaces: arrayRemove({
+            uid: id,
+            name: name,
+          }),
+        });
+        console.log("Workspace deleted");
+      }
     });
   } catch (err) {
     console.log(err);
