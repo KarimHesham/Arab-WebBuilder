@@ -18,6 +18,10 @@ function App() {
         <Route path="/reset" element={<Reset />} />
         <Route path="/home" element={<Landing />} />
         <Route path="/demo" element={<Editor />} />
+        <Route
+          path="/:userame/:workspaceName/:projectName/:pageName"
+          element={<Editor />}
+        />
         <Route path="/:username/workspaces" element={<Workspaces />} />
         <Route path="/:username/:workspaceName" element={<Project />} />
         <Route

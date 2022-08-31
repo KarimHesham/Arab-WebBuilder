@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navbar, Sidebar } from "../../../components";
 import Page from "./Page";
@@ -6,11 +6,16 @@ import AddIcon from "@mui/icons-material/Add";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import { addPage, getPages } from "../../../services/firebase/pages";
 import { setUserPages } from "../../../state/features/pagesDataSlice";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../../config/firebase/firebase";
 
 const Pages = () => {
+  const [user, loading, error] = useAuthState(auth);
+
   const activeProject = useSelector(
     (state) => state.projectsData.activeProject
   );
+  const pages = useSelector((state) => state.pagesData.pages);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -38,6 +43,12 @@ const Pages = () => {
       });
     setShowModal(false);
   };
+
+  useEffect(() => {
+    if (loading || error) return;
+
+    getUserPages(activeProject.uid);
+  }, [user, activeProject, loading, error]);
 
   return (
     <>
@@ -76,6 +87,7 @@ const Pages = () => {
                   onChange={(e) =>
                     setNewPage({
                       name: e.target.value,
+                      projectId: activeProject.uid,
                       createdAt: new Date().toLocaleDateString(),
                     })
                   }
@@ -102,12 +114,14 @@ const Pages = () => {
           </div>
 
           <div className="">
-            {activeProject.pages?.length > 0
-              ? activeProject.pages.map((page) => {
+            {pages.length > 0
+              ? pages?.map((page) => {
                   return (
                     <Page
-                      key={page.id}
+                      key={page.uid}
+                      id={page.uid}
                       name={page.name}
+                      projectName={activeProject.name}
                       created={page.createdAt}
                     />
                   );

@@ -41,18 +41,14 @@ const Project = ({ id, name, workspaceName }) => {
   };
 
   const getUserProjects = (workspaceId) => {
-    console.log(activeWorkspace.uid);
     getProjects(workspaceId)
       .then((data) => {
-        console.log(data);
         dispatch(setUserProjects(data));
       })
       .catch((err) => console.log(err));
   };
 
-  const openProject = () => {
-    console.log(workspaceName);
-
+  const openProject = (id) => {
     getProject(id)
       .then((data) => {
         dispatch(setActiveProject(data));
@@ -81,7 +77,7 @@ const Project = ({ id, name, workspaceName }) => {
       <div className="flex flex-col justify-between w-40 md:w-48 h-24 m-1 bg-white shadow-lg rounded-md p-3 border hover:bg-slate-100 bg-opacity-50 hover:backdrop:duration-100 hover:bg-opacity-100 cursor-pointer">
         <h2 className="font-bold">{name}</h2>
         <div className="flex items-center justify-end">
-          <button onClick={() => openProject()}>
+          <button onClick={() => openProject(id)}>
             <NavigateNextIcon className="text-blue-700 hover:scale-110" />
           </button>
 

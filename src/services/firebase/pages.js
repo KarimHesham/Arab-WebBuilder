@@ -1,7 +1,9 @@
 import {
+  arrayRemove,
   arrayUnion,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   orderBy,
   query,
@@ -49,7 +51,7 @@ const addPage = async (page) => {
       if (result.docs.length > 0) {
         const projectDoc = doc(db, "projects", result.docs[0].id);
         updateDoc(projectDoc, {
-          projects: arrayUnion({
+          pages: arrayUnion({
             uid: newPage.id,
             name: page.name,
           }),
@@ -61,9 +63,34 @@ const addPage = async (page) => {
   }
 };
 
-const deletePage = async (id) => {
+const getPage = async (id) => {
   try {
-    await deleteDoc(doc(db, "pages", id)).then(() => {
+    const docRef = doc(db, "pages", id);
+
+    const docSnapshot = await getDoc(docRef);
+    if (docSnapshot.exists()) {
+      console.log(docSnapshot.data());
+      return docSnapshot.data();
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const deletePage = async (id, name, projectId) => {
+  try {
+    await deleteDoc(doc(db, "pages", id)).then(async () => {
+      const q = query(projectsRef, where("uid", "==", projectId));
+      const result = await getDocs(q);
+      if (result.docs.length > 0) {
+        const projectDoc = doc(db, "projects", result.docs[0].id);
+        updateDoc(projectDoc, {
+          pages: arrayRemove({
+            uid: id,
+            name: name,
+          }),
+        });
+      }
       console.log("Page deleted successfully");
     });
   } catch (err) {
@@ -71,4 +98,4 @@ const deletePage = async (id) => {
   }
 };
 
-export { addPage, getPages, deletePage };
+export { addPage, getPages, deletePage, getPage };
