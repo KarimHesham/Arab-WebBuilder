@@ -1,4 +1,5 @@
 import styles from '../../../style';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -20,10 +21,10 @@ const Header = () => {
             تجربه
           </a>
 
-          <a href="/"
+          <NavLink to="/Register"
             className={`${styles.greenBtn}`}>
             إبدأ الآن
-          </a>
+          </NavLink>
         </div>
 
         <div className="lg:hidden bg-white text-[18px] p-8 border-4 text-center border-red-800 rounded-xl">
