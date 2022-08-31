@@ -7,8 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../../../config/firebase/firebase";
 import { addProject, getProjects } from "../../../services/firebase/projects";
 import { setUserProjects } from "../../../state/features/projectsDataSlice";
-import { getWorkspaces } from "../../../services/firebase/workspaces";
-import { setUserWorkspaces } from "../../../state/features/workspacesDataSlice";
 
 const Workspace = () => {
   const [user, loading, error] = useAuthState(auth);

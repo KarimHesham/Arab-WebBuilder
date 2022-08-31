@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Navbar } from "../../../components";
-import SidebarDemo from "./SidebarDemo";
 import { editorConfig } from "../../../config/index";
+import SidebarDemo from "./SidebarDemo";
 
-const Editor = () => {
+const Demo = () => {
   const [editor, setEditor] = useState(null);
 
   useEffect(() => {
@@ -31,4 +31,4 @@ const Editor = () => {
   );
 };
 
-export default Editor;
+export default Demo;

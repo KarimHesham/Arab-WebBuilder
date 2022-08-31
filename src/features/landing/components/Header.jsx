@@ -17,7 +17,7 @@ const Header = () => {
         </h2>
 
         <div className="hidden lg:flex items-center space-x-6">
-          <NavLink className={`${styles.whiteBtn}`} to="/demo" rel="noreferrer">
+          <NavLink className={`${styles.whiteBtn}`} to="/demo">
             تجربه
           </NavLink>
 

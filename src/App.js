@@ -1,9 +1,8 @@
-import { Editor } from "./features/editor/index";
+import { Demo, Editor } from "./features/editor/index";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Workspaces } from "./features/workspaces";
 import { Project } from "./features/projects";
 import Pages from "./features/pages/components/Pages";
-import Home from "./components/Home";
 import Landing from "./features/landing/Landing";
 import { Login, Register, Reset } from "./features/userProfile/index";
 import "./index.css";
@@ -16,7 +15,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/" element={<Landing />} />
-        <Route path="/demo" element={<Editor />} />
+        <Route path="/demo" element={<Demo />} />
         <Route
           path="/:userame/:workspaceName/:projectName/:pageName"
           element={<Editor />}
