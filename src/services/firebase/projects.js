@@ -38,6 +38,7 @@ const getProjects = async (workspaceId) => {
     console.log(err);
   }
 };
+
 const getProject = async (id) => {
   try {
     const docRef = doc(db, "projects", id);

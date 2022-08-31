@@ -47,7 +47,7 @@ const Workspace = () => {
     if (loading || error) return;
 
     getUserProjects(activeWorkspace.uid);
-  }, [user, activeWorkspace, dispatch, loading, error]);
+  }, [user, activeWorkspace, loading, error]);
 
   return (
     <div>

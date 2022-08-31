@@ -35,7 +35,7 @@ const Workspace = ({ id, name, projects }) => {
       .catch((err) => console.log(err));
   };
 
-  const openWorkspace = () => {
+  const openWorkspace = (id) => {
     dispatch(setActiveWorkspace({ uid: id, name, projects }));
     navigate(`/${activeUser.username}/${name}`);
   };
@@ -60,7 +60,10 @@ const Workspace = ({ id, name, projects }) => {
           <h2 className="font-bold">{name}</h2>
         </div>
         <div className="flex items-center flex-wrap">
-          <button onClick={() => openWorkspace()} className="workspace-button">
+          <button
+            onClick={() => openWorkspace(id)}
+            className="workspace-button"
+          >
             <ViewModuleIcon className="h-4" />
             <p>Projects</p>
           </button>

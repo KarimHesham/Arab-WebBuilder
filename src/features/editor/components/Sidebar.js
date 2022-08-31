@@ -2,32 +2,58 @@ import React, { useState, useEffect } from "react";
 import Page from "./Page";
 import TabsRender from "./Tabs";
 import AddIcon from "@mui/icons-material/Add";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addPage, getPages } from "../../../services/firebase/pages";
+import { setUserPages } from "../../../state/features/pagesDataSlice";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../../config/firebase/firebase";
 
 const Sidebar = () => {
-  const user = useSelector((state) => state.userData.user);
-  const [pages, setPages] = useState([]);
+  const [user, loading, error] = useAuthState(auth);
+
+  const activeProject = useSelector(
+    (state) => state.projectsData.activeProject
+  );
+  const pages = useSelector((state) => state.pagesData.pages);
 
   const [showModal, setShowModal] = useState(false);
-  const [counter, setCounter] = useState(2);
 
   const [newPage, setNewPage] = useState({});
 
-  useEffect(() => {
-    setPages(user.workspaces[0].projects[0].pages);
-  }, [user.workspaces]);
+  const dispatch = useDispatch();
 
-  const addPage = (page) => {
-    // project.pages.push(page);
-    setCounter(counter + 1);
+  const getUserPages = (projectId) => {
+    getPages(projectId)
+      .then((data) => {
+        dispatch(setUserPages(data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const addNewPage = (page) => {
+    addPage(page)
+      .then(() => {
+        getUserPages(activeProject.uid);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     setShowModal(false);
   };
+
+  useEffect(() => {
+    if (loading || error) return;
+
+    getUserPages(activeProject.uid);
+  }, [user, activeProject, loading, error]);
 
   return (
     <div className="w-48 md:w-64 h-screen overflow-y-scroll overflow-x-hidden bg-gray-100 border-r-2 rounded-md">
       <button
         onClick={() => setShowModal(true)}
-        className="flex items-center bg-blue-600 hover:bg-blue-700 px-4 py-1 rounded-md my-6 justify-center text-white w-10/12 mx-auto"
+        className="flex items-center bg-blue-600 hover:bg-blue-700 px-4 py-1 rounded-md shadow-md my-6 justify-center text-white w-10/12 mx-auto"
       >
         <AddIcon className="h-4" />
         Add Page
@@ -47,8 +73,8 @@ const Sidebar = () => {
               type="text"
               onChange={(e) =>
                 setNewPage({
-                  id: counter,
                   name: e.target.value,
+                  projectId: activeProject.uid,
                   createdAt: new Date().toLocaleDateString(),
                 })
               }
@@ -62,7 +88,7 @@ const Sidebar = () => {
                 Cancel
               </button>
               <button
-                onClick={() => addPage(newPage)}
+                onClick={() => addNewPage(newPage)}
                 className="w-16 h-6 text-xs md:text-sm bg-blue-600 rounded-md justify-center text-white hover:bg-blue-700 cursor-pointer font-semibold"
               >
                 Add
@@ -73,8 +99,15 @@ const Sidebar = () => {
       </div>
       <div className="flex items-center border-b-2 border-t-2 overflow-x-hidden overflow-y-scroll scroll-smooth">
         <ul className="w-full h-40 border-slate-200">
-          {pages.map((page) => {
-            return <Page key={page.id} id={page.id} name={page.name} />;
+          {pages?.map((page) => {
+            return (
+              <Page
+                key={page.uid}
+                id={page.uid}
+                projectName={activeProject.name}
+                name={page.name}
+              />
+            );
           })}
         </ul>
       </div>
