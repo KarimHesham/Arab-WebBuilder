@@ -1,4 +1,5 @@
 import styles from '../../../style';
+import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -10,9 +11,10 @@ const Footer = () => {
           للتطبيقات والمواقع لممارسي مهنة البرمجة ومحترفيها
         </p>
 
-        <a className={`${styles.greenBtn} mt-10`} href="/">
+        <NavLink to="/Register"
+          className={`${styles.greenBtn}  mt-10`}>
           إبدأ الآن
-        </a>
+        </NavLink>
       </div>
 
       <div className="bg-gray-700 text-center text-white">

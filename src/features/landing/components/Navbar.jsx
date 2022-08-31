@@ -38,16 +38,16 @@ const Navbar = () => {
         <div className={`${toggle ? 'flex' : 'hidden'} p-6 absolute top-20 left-0 my-1 mx-3 min-w-[140px] rounded-xl sidebar bg-gray-gradient shadow-md`}>
           <ul className='list-none flex flex-col justify-end items-center flex-1'>
             <li className='font-normal text-[16px] cursor-pointer mb-4'>
-              <a href="#support">الدعم</a>
+              <a href="#support" onClick={() => setToggle((prev) => !prev)}>الدعم</a>
             </li>
             <li className='font-normal text-[16px] cursor-pointer mb-4'>
-              <a href="#features">الخصائص</a>
+              <a href="#features" onClick={() => setToggle((prev) => !prev)}>الخصائص</a>
             </li>
             <li className='font-normal text-[16px] cursor-pointer mb-4'>
-              <a href="http://arabcode.ae/Docs/Intro" target='_blank' rel="noreferrer">دليل المستخدم</a>
+              <a href="http://arabcode.ae/Docs/Intro" target='_blank' rel="noreferrer" onClick={() => setToggle((prev) => !prev)}>دليل المستخدم</a>
             </li>
             <li className='font-normal text-[16px] cursor-pointer'>
-              <a href="https://arabcode.ae" target='_blank' rel="noreferrer">موقع عرب</a>
+              <a href="https://arabcode.ae" target='_blank' rel="noreferrer" onClick={() => setToggle((prev) => !prev)}>موقع عرب</a>
             </li>
           </ul>
         </div>
