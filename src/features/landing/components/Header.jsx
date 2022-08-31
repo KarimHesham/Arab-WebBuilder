@@ -17,6 +17,7 @@ const Header = () => {
           <a
             className={`${styles.whiteBtn}`}
             href="http://waleedbaz-002-site1.htempurl.com/grapes/build/index.html"
+            target='_blank' rel="noreferrer"
           >
             تجربه
           </a>

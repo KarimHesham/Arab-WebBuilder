@@ -12,12 +12,12 @@ const Navbar = () => {
 
       {/* desktop */}
       <ul className='list-none hidden md:flex justify-start items-center flex-1'>
-        < li className='font-normal text-[18px] cursor-pointer hover:text-green-800 transition-colors mr-10' >
-          <a href="#support">الدعم</a>
-        </li >
         <li className='font-normal text-[18px] cursor-pointer hover:text-green-800 transition-colors mr-10'>
           <a href="#features">الخصائص</a>
         </li>
+        < li className='font-normal text-[18px] cursor-pointer hover:text-green-800 transition-colors mr-10' >
+          <a href="#support">الدعم</a>
+        </li >
         <li className='font-normal text-[18px] cursor-pointer hover:text-green-800 transition-colors mr-10'>
           <a href="http://arabcode.ae/Docs/Intro" target='_blank' rel="noreferrer">دليل المستخدم</a>
         </li>

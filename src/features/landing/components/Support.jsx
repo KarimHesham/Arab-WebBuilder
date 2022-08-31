@@ -12,7 +12,7 @@ const Support = () => (
     </div>
 
     <div className={`${styles.flexCenter}`}>
-      <a href="https://arabcode.ae/Home/Contribute" className={`${styles.whiteBtn}`}>
+      <a href="https://arabcode.ae/Home/Contribute" className={`${styles.whiteBtn}`} target='_blank' rel="noreferrer">
         ساهم معنا
       </a>
     </div>
