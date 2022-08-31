@@ -35,18 +35,14 @@ const Register = () => {
   const emailRegistration = (email, password) => {
     if (email && password) {
       registerWithEmailAndPassword(email, password)
-        .then(() => {
-          console.log("Registration successful");
-        })
+        .then(() => {})
         .catch((err) => err ?? console.log(err));
     }
   };
 
   const googleRegistration = () => {
     signInWithGoogle()
-      .then(() => {
-        console.log("Google sign up successful");
-      })
+      .then(() => {})
       .catch((err) => console.log(err));
   };
 
@@ -85,7 +81,6 @@ const Register = () => {
         initialValues={initialValues}
         validationSchema={registerValidation}
         onSubmit={(values) => {
-          console.log("Form submitted");
           emailRegistration(values.email, values.password);
         }}
       >

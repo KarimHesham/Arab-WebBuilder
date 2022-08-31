@@ -32,7 +32,6 @@ const getProjects = async (workspaceId) => {
       });
     }
 
-    console.log(projects);
     return projects;
   } catch (err) {
     console.log(err);
@@ -45,7 +44,6 @@ const getProject = async (id) => {
 
     const docSnapshot = await getDoc(docRef);
     if (docSnapshot.exists()) {
-      console.log(docSnapshot.data());
       return docSnapshot.data();
     }
   } catch (err) {
@@ -92,7 +90,6 @@ const deleteProject = async (id, name, workspaceId) => {
           }),
         });
       }
-      console.log("Project deleted");
     });
   } catch (err) {
     console.log(err);

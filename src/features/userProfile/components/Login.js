@@ -40,8 +40,6 @@ const Login = () => {
       logInWithEmailAndPassword(email, password)
         .then(() => {
           if (user) {
-            console.log("Login successful");
-            console.log(getWorkspaces(activeUser.username));
           }
         })
         .catch((err) => err ?? console.log(err));
@@ -52,8 +50,6 @@ const Login = () => {
     signInWithGoogle()
       .then(() => {
         if (user) {
-          console.log("Google sign in successful");
-          console.log(getWorkspaces(activeUser.username));
         }
       })
       .catch((err) => err ?? console.log(err));
@@ -79,7 +75,6 @@ const Login = () => {
         initialValues={initialValues}
         validationSchema={loginValidation}
         onSubmit={(values) => {
-          console.log("Form submitted");
           emailLogin(values.email, values.password);
         }}
       >

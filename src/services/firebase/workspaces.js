@@ -75,7 +75,6 @@ const deleteWorkspace = async (id, name, username) => {
             name: name,
           }),
         });
-        console.log("Workspace deleted");
       }
     });
   } catch (err) {

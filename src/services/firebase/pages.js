@@ -32,7 +32,6 @@ const getPages = async (projectId) => {
       });
     }
 
-    console.log(pages);
     return pages;
   } catch (err) {
     console.log(err);
@@ -69,7 +68,6 @@ const getPage = async (id) => {
 
     const docSnapshot = await getDoc(docRef);
     if (docSnapshot.exists()) {
-      console.log(docSnapshot.data());
       return docSnapshot.data();
     }
   } catch (err) {
@@ -91,7 +89,6 @@ const deletePage = async (id, name, projectId) => {
           }),
         });
       }
-      console.log("Page deleted successfully");
     });
   } catch (err) {
     console.log(err);

@@ -12,11 +12,9 @@ const Reset = () => {
   const resetPassword = (value) => {
     setEmail(value.email);
 
-    console.log(email);
     if (email) {
       sendPasswordReset(email)
         .then(() => {
-          console.log("Password reset email sent");
           navigate("/");
         })
         .catch((err) => console.log(err));
@@ -37,7 +35,6 @@ const Reset = () => {
         initialValues={initialValues}
         validationSchema={resetValidation}
         onSubmit={(values) => {
-          console.log("Form Submitted");
           resetPassword(values);
         }}
       >

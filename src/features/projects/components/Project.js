@@ -26,11 +26,8 @@ const Workspace = () => {
   const dispatch = useDispatch();
 
   const getUserProjects = (workspaceId) => {
-    console.log(activeWorkspace.uid);
-
     getProjects(workspaceId)
       .then((data) => {
-        console.log(data);
         dispatch(setUserProjects(data));
       })
       .catch((err) => console.log(err));
