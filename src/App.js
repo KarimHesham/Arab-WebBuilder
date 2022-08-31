@@ -4,7 +4,7 @@ import { Workspaces } from "./features/workspaces";
 import { Project } from "./features/projects";
 import Pages from "./features/pages/components/Pages";
 import Home from "./components/Home";
-import Landing from "./features/landing/components/Landing";
+import Landing from "./features/landing/Landing";
 import { Login, Register, Reset } from "./features/userProfile/index";
 import "./index.css";
 
