@@ -87,7 +87,7 @@ const Project = ({ id, name, workspaceName }) => {
         </div>
       </div>
 
-      <div className="flex items-center justify-end z-50">
+      <div className="flex items-center z-50">
         {showModal ? (
           <div className="w-64 h-32 rounded-md bg-gray border-2 p-2 flex flex-col justify-between shadow-md">
             <h1>Are you sure you want to delete project?</h1>
