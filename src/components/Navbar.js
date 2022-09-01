@@ -3,25 +3,23 @@ import React from "react";
 // import SearchIcon from "@mui/icons-material/Search";
 // import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 // import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { logout } from "../services/firebase/auth";
-import { useNavigate } from "react-router-dom";
-import LogoutIcon from "@mui/icons-material/Logout";
+// import { logout } from "../services/firebase/auth";
+// import { useNavigate } from "react-router-dom";
+// import LogoutIcon from "@mui/icons-material/Logout";
+import logo from '../assets/arab-logo.png';
+import UserDropDown from './UserDropDown';
 
 const Navbar = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const SignOut = () => {
-    logout();
-    navigate("/");
-  };
+  // const SignOut = () => {
+  //   logout();
+  //   navigate("/");
+  // };
   return (
     <nav className="navbar">
       <div className="flex space-x-2 lg:space-x-6 items-center justify-center">
-        <img
-          src="http://arabcode.ae/images/arab-logo.png"
-          alt=""
-          className="h-8"
-        />
+        <img src={logo} alt="arab logo" className='w-[90px] h-[45px] object-contain' />
 
         <div className="hidden sm:flex items-center justify-center space-x-10">
           {/* <Dropdown />
@@ -46,7 +44,9 @@ const Navbar = () => {
 
         <NotificationsNoneIcon className="navbar-button" /> */}
 
-        <LogoutIcon className="navbar-button" onClick={() => SignOut()} />
+        {/* <LogoutIcon className="navbar-button" onClick={() => SignOut()} /> */}
+
+        <UserDropDown />
       </div>
     </nav>
   );

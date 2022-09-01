@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Workspaces } from "./features/workspaces";
 import { Project } from "./features/projects";
 import Pages from "./features/pages/components/Pages";
-import Landing from "./features/landing/Landing";
+import { Landing } from "./features/landing";
 import { Login, Register, Reset } from "./features/userProfile/index";
 import "./index.css";
 

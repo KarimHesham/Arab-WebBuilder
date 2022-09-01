@@ -17,8 +17,8 @@ const styles = {
     marginX: "md:mx-16 mx-6",
     marginY: "md:my-16 my-6",
 
-    whiteBtn: "px-16 py-4 text-[26px] font-semibold border-2 border-green-600 rounded-xl transition-all text-green-600 hover:text-green-700 bg-white hover:bg-slate-50 hover:shadow-lg",
-    greenBtn: "px-16 py-4 text-[26px] font-semibold border-2 border-green-600 rounded-xl transition-all text-white hover:text-slate-50 bg-green-600 hover:bg-green-700 hover:shadow-lg"
+    whiteBtn: "px-16 py-4 text-[26px] font-semibold border-2 border-green-600 rounded-xl hover:border-green-700 transition-all text-green-600 hover:text-green-700 bg-white hover:bg-slate-50 hover:shadow-lg",
+    greenBtn: "px-16 py-4 text-[26px] font-semibold border-2 border-green-600 rounded-xl hover:border-green-700 transition-all text-white hover:text-slate-50 bg-green-600 hover:bg-green-700 hover:shadow-lg"
 };
 
 export const layout = {

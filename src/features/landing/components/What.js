@@ -33,7 +33,6 @@ const What = () => (
       </div>
     </div>
 
-
   </section>
 );
 

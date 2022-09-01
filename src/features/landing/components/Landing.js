@@ -1,6 +1,12 @@
-import { Navbar, Header, What, Features, Support, Footer, ScrollTop } from "./components";
+import Navbar from './Navbar';
+import Header from './Header';
+import What from './What';
+import Features from './Features';
+import Support from './Support';
+import Footer from './Footer';
+import ScrollTop from './ScrollTop';
 
-import styles from "../../style";
+import styles from "../../../style";
 
 const Landing = () => (
 
@@ -40,7 +46,7 @@ const Landing = () => (
         <Support />
       </div>
     </div>
-    
+
     <Footer />
     {/* sections */}
 

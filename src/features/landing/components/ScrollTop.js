@@ -20,7 +20,7 @@ const ScrollTop = () => {
 
   return (
     <div
-      className={`${showScrollTop ? "fixed" : "hidden"} bottom-3 md:bottom-5 right-3 md:right-5 w-[40px] h-[40px] rounded-full ${styles.flexCenter} bg-green-700 hover:scale-110 transition-transform shadow-md z-10 cursor-pointer`}
+      className={`${showScrollTop ? "fixed" : "hidden"} bottom-4 md:bottom-5 right-4 md:right-5 w-[40px] h-[40px] rounded-full ${styles.flexCenter} bg-green-700 hover:scale-110 transition-transform shadow-md z-10 cursor-pointer`}
       onClick={() => handleScrollUp()}
     >
       <KeyboardArrowUpIcon
