@@ -1,16 +1,19 @@
 import React from "react";
+import { useSelector } from "react-redux";
 // import Dropdown from "./Dropdown";
 // import SearchIcon from "@mui/icons-material/Search";
 // import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 // import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 // import { logout } from "../services/firebase/auth";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import LogoutIcon from "@mui/icons-material/Logout";
-import logo from '../assets/arab-logo.png';
-import UserDropDown from './UserDropDown';
+import logo from "../assets/arab-logo.png";
+import UserDropDown from "./UserDropDown";
 
 const Navbar = () => {
-  // const navigate = useNavigate();
+  const activeUser = useSelector((state) => state.userData.user);
+
+  const navigate = useNavigate();
 
   // const SignOut = () => {
   //   logout();
@@ -18,8 +21,15 @@ const Navbar = () => {
   // };
   return (
     <nav className="navbar">
-      <div className="flex space-x-2 lg:space-x-6 items-center justify-center">
-        <img src={logo} alt="arab logo" className='w-[90px] h-[45px] object-contain' />
+      <div
+        className="flex space-x-2 lg:space-x-6 items-center justify-center cursor-pointer"
+        onClick={() => navigate(`/${activeUser.username}/workspaces`)}
+      >
+        <img
+          src={logo}
+          alt="arab logo"
+          className="w-[90px] h-[45px] object-contain"
+        />
 
         <div className="hidden sm:flex items-center justify-center space-x-10">
           {/* <Dropdown />

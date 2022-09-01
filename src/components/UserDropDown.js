@@ -1,22 +1,16 @@
 import { Fragment } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { Menu, Transition } from "@headlessui/react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { logout } from "../services/firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { auth } from "../config/firebase/firebase";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const UserDropDown = () => {
-  const [user, loading, error] = useAuthState(auth);
   const activeUser = useSelector((state) => state.userData.user);
-
-  //   console.log(user.photoURL);
 
   const navigate = useNavigate();
 

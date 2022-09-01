@@ -60,7 +60,7 @@ const Main = () => {
 
         <div
           onClick={() => setShowModal(true)}
-          className="flex items-center px-6 py-1 md:px-8 text-sm bg-blue-600 rounded-md justify-center text-white hover:bg-blue-700 cursor-pointer font-semibold"
+          className="md:hidden flex items-center px-6 py-1 md:px-8 text-sm bg-blue-600 rounded-md justify-center text-white hover:bg-blue-700 cursor-pointer font-semibold"
         >
           <AddIcon className="h-1" />
           <p>New</p>
