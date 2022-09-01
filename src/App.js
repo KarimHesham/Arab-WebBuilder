@@ -11,20 +11,20 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/reset" element={<Reset />} />
-        <Route path="/" element={<Landing />} />
         <Route path="/demo" element={<Demo />} />
-        <Route
-          path="/:userame/:workspaceName/:projectName/:pageName"
-          element={<Editor />}
-        />
         <Route path="/:username/workspaces" element={<Workspaces />} />
         <Route path="/:username/:workspaceName" element={<Project />} />
         <Route
           path="/:username/:workspaceName/:projectName"
           element={<Pages />}
+        />
+        <Route
+          path="/:userame/:workspaceName/:projectName/:pageName"
+          element={<Editor />}
         />
       </Routes>
     </Router>
