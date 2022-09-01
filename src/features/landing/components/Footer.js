@@ -10,7 +10,7 @@ const Footer = () => {
           للتطبيقات والمواقع لممارسي مهنة البرمجة ومحترفيها
         </p>
 
-        <NavLink to="/register" className={`${styles.greenBtn}  mt-10`}>
+        <NavLink to="/register" className={`${styles.greenBtn}  mt-10 hidden lg:block`}>
           إبدأ الآن
         </NavLink>
       </div>
