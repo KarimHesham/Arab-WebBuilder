@@ -26,6 +26,7 @@ const Register = () => {
           id: user.uid,
           email: user.email,
           username: user.email.split("@")[0],
+          photoURL: user.photoURL,
         })
       );
       navigate(`/${user.email.split("@")[0]}/workspaces`);

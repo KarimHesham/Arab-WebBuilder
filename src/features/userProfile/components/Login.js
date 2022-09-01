@@ -11,11 +11,9 @@ import {
 } from "../../../services/firebase/auth";
 import { setUser } from "../../../state/features/userDataSlice";
 import GoogleIcon from "@mui/icons-material/Google";
-import { getWorkspaces } from "../../../services/firebase/workspaces";
 
 const Login = () => {
   const [user, loading, error] = useAuthState(auth);
-  const activeUser = useSelector((state) => state.userData.user);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,6 +26,7 @@ const Login = () => {
           id: user.uid,
           email: user.email,
           username: user.email.split("@")[0],
+          photoURL: user.photoURL,
         })
       );
       navigate(`/${user.email.split("@")[0]}/workspaces`);
