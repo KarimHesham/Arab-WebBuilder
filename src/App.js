@@ -21,7 +21,7 @@ function App() {
         <Route
           path="/:username/:workspaceName/:projectName"
           element={<Pages />}
-        />j
+        />
         <Route
           path="/:userame/:workspaceName/:projectName/:pageName"
           element={<Editor />}
