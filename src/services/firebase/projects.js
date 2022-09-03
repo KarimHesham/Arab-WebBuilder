@@ -10,9 +10,10 @@ import {
   setDoc,
   updateDoc,
   where,
+  writeBatch,
 } from "firebase/firestore";
 import { db } from "../../config/firebase/firebase";
-import { projectsRef, workspacesRef } from "./db";
+import { pagesRef, projectsRef, workspacesRef } from "./db";
 
 const getProjects = async (workspaceId) => {
   const projects = [];
@@ -78,19 +79,33 @@ const addProject = async (project) => {
 
 const deleteProject = async (id, name, workspaceId) => {
   try {
-    await deleteDoc(doc(db, "projects", id)).then(async () => {
-      const q = query(workspacesRef, where("uid", "==", workspaceId));
-      const result = await getDocs(q);
-      if (result.docs.length > 0) {
-        const workspaceDoc = doc(db, "workspaces", result.docs[0].id);
-        updateDoc(workspaceDoc, {
-          projects: arrayRemove({
-            uid: id,
-            name: name,
-          }),
+    await deleteDoc(doc(db, "projects", id))
+      .then(async () => {
+        const q = query(workspacesRef, where("uid", "==", workspaceId));
+        const result = await getDocs(q);
+        if (result.docs.length > 0) {
+          const workspaceDoc = doc(db, "workspaces", result.docs[0].id);
+          updateDoc(workspaceDoc, {
+            projects: arrayRemove({
+              uid: id,
+              name: name,
+            }),
+          });
+        }
+      })
+      .then(async () => {
+        const batch = writeBatch(db);
+
+        const pagesQuery = query(pagesRef, where("projectId", "==", id));
+
+        const pagesSnapshot = await getDocs(pagesQuery);
+
+        pagesSnapshot.forEach((doc) => {
+          batch.delete(doc.ref);
         });
-      }
-    });
+
+        return batch.commit();
+      });
   } catch (err) {
     console.log(err);
   }

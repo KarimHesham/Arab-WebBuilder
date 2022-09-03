@@ -9,9 +9,10 @@ import {
   where,
   deleteDoc,
   arrayRemove,
+  writeBatch,
 } from "firebase/firestore";
 import { db } from "../../config/firebase/firebase";
-import { usersRef, workspacesRef } from "./db";
+import { pagesRef, projectsRef, usersRef, workspacesRef } from "./db";
 
 const getWorkspaces = async (username) => {
   const workspaces = [];
@@ -46,9 +47,9 @@ const addWorkspace = async (workspace) => {
       projects: [],
     }).then(async () => {
       const q = query(usersRef, where("username", "==", workspace.username));
-      const result = await getDocs(q);
-      if (result.docs.length > 0) {
-        const userDoc = doc(db, "users", result.docs[0].id);
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.docs.length > 0) {
+        const userDoc = doc(db, "users", querySnapshot.docs[0].id);
         updateDoc(userDoc, {
           workspaces: arrayUnion({
             uid: newWorkspace.id,
@@ -64,19 +65,41 @@ const addWorkspace = async (workspace) => {
 
 const deleteWorkspace = async (id, name, username) => {
   try {
-    await deleteDoc(doc(db, "workspaces", id)).then(async () => {
-      const q = query(usersRef, where("username", "==", username));
-      const result = await getDocs(q);
-      if (result.docs.length > 0) {
-        const userDoc = doc(db, "users", result.docs[0].id);
-        updateDoc(userDoc, {
-          workspaces: arrayRemove({
-            uid: id,
-            name: name,
-          }),
+    await deleteDoc(doc(db, "workspaces", id))
+      .then(async () => {
+        const q = query(usersRef, where("username", "==", username));
+        const querySnapshot = await getDocs(q);
+        if (querySnapshot.docs.length > 0) {
+          const userDoc = doc(db, "users", querySnapshot.docs[0].id);
+          updateDoc(userDoc, {
+            workspaces: arrayRemove({
+              uid: id,
+              name: name,
+            }),
+          });
+        }
+      })
+      .then(async () => {
+        const batch = writeBatch(db);
+
+        const projectsQuery = query(
+          projectsRef,
+          where("workspaceId", "==", id)
+        );
+        const pagesQuery = query(pagesRef, where("workspaceId", "==", id));
+
+        const projectsSnapshot = await getDocs(projectsQuery);
+        const pagesSnapshot = await getDocs(pagesQuery);
+
+        projectsSnapshot.forEach((doc) => {
+          batch.delete(doc.ref);
         });
-      }
-    });
+        pagesSnapshot.forEach((doc) => {
+          batch.delete(doc.ref);
+        });
+
+        return batch.commit();
+      });
   } catch (err) {
     console.log(err);
   }
