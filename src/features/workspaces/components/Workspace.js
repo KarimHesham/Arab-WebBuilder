@@ -109,6 +109,7 @@ const Workspace = ({ id, name, projects }) => {
                   key={project.uid}
                   id={project.uid}
                   name={project.name}
+                  workspaceId={id}
                   workspaceName={name}
                 />
               );

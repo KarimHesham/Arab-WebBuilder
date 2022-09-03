@@ -12,6 +12,9 @@ import { auth } from "../../../config/firebase/firebase";
 const Pages = () => {
   const [user, loading, error] = useAuthState(auth);
 
+  const activeWorkspace = useSelector(
+    (state) => state.workspacesData.activeWorkspace
+  );
   const activeProject = useSelector(
     (state) => state.projectsData.activeProject
   );
@@ -87,6 +90,7 @@ const Pages = () => {
                   onChange={(e) =>
                     setNewPage({
                       name: e.target.value,
+                      workspaceId: activeWorkspace.uid,
                       projectId: activeProject.uid,
                       createdAt: new Date().toLocaleDateString(),
                     })

@@ -20,7 +20,7 @@ import {
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../config/firebase/firebase";
 
-const Project = ({ id, name, workspaceName }) => {
+const Project = ({ id, name, workspaceId, workspaceName }) => {
   const [user] = useAuthState(auth);
 
   const activeUser = useSelector((state) => state.userData.user);
@@ -56,7 +56,9 @@ const Project = ({ id, name, workspaceName }) => {
       .then((data) => {
         dispatch(setActiveProject(data));
         if (!activeWorkspace) {
-          dispatch(setActiveWorkspace({ name: workspaceName }));
+          dispatch(
+            setActiveWorkspace({ uid: workspaceId, name: workspaceName })
+          );
         }
       })
       .then(() => {
