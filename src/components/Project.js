@@ -13,7 +13,10 @@ import {
   getProjects,
 } from "../services/firebase/projects";
 import { getWorkspaces } from "../services/firebase/workspaces";
-import { setUserWorkspaces } from "../state/features/workspacesDataSlice";
+import {
+  setActiveWorkspace,
+  setUserWorkspaces,
+} from "../state/features/workspacesDataSlice";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../config/firebase/firebase";
 
@@ -52,6 +55,9 @@ const Project = ({ id, name, workspaceName }) => {
     getProject(id)
       .then((data) => {
         dispatch(setActiveProject(data));
+        if (!activeWorkspace) {
+          dispatch(setActiveWorkspace({ name: workspaceName }));
+        }
       })
       .then(() => {
         navigate(`/${activeUser.username}/${workspaceName}/${name}`);
