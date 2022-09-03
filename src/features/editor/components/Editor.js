@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navbar } from "../../../components";
-import SidebarDemo from "./SidebarDemo";
+import Sidebar from "./Sidebar";
 import { editorConfig } from "../../../config/index";
 
 const Editor = () => {
@@ -16,7 +16,7 @@ const Editor = () => {
     <div className="">
       <Navbar />
       <div className="flex">
-        <SidebarDemo />
+        <Sidebar />
         <div className="w-full">
           <div className="flex justify-center space-x-96">
             <div className="panel-devices"></div>

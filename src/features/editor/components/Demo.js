@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Navbar } from "../../../components";
 import { editorConfig } from "../../../config/index";
+import NavbarDemo from "./NavbarDemo";
 import SidebarDemo from "./SidebarDemo";
 
 const Demo = () => {
@@ -14,7 +14,7 @@ const Demo = () => {
 
   return (
     <div className="">
-      <Navbar />
+      <NavbarDemo />
       <div className="flex">
         <SidebarDemo />
         <div className="w-full">
