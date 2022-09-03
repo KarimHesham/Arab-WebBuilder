@@ -11,6 +11,9 @@ import { auth } from "../../../config/firebase/firebase";
 const Sidebar = () => {
   const [user, loading, error] = useAuthState(auth);
 
+  const activeWorkspace = useSelector(
+    (state) => state.workspacesData.activeWorkspace
+  );
   const activeProject = useSelector(
     (state) => state.projectsData.activeProject
   );
@@ -74,6 +77,7 @@ const Sidebar = () => {
               onChange={(e) =>
                 setNewPage({
                   name: e.target.value,
+                  workspaceId: activeWorkspace.uid,
                   projectId: activeProject.uid,
                   createdAt: new Date().toLocaleDateString(),
                 })
