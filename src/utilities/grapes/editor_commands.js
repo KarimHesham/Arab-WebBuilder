@@ -1,3 +1,5 @@
+import Test from "../../features/test/Test";
+
 // Commands
 export const addEditorCommand = (editor) => {
   editor.Commands.add("set-device-desktop", {
@@ -35,8 +37,7 @@ export const addEditorCommand = (editor) => {
     run: (editor) => {
       editor.Modal.open({
         title: "Arab code",
-        content:
-          "<div style='width: 50vw; height:80vh;'><textarea style='width: 80%; height: 90%;' placeholder='Arab code goes here...'></textarea></div>",
+        content: `${(<Test />)}`,
         attirbutes: {
           class: "arab-modal",
         },

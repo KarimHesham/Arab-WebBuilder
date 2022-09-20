@@ -125,7 +125,7 @@ const Pages = () => {
                       key={page.uid}
                       id={page.uid}
                       name={page.name}
-                      projectName={activeProject.name}
+                      projectName={activeProject?.name}
                       created={page.createdAt}
                     />
                   );

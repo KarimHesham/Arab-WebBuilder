@@ -6,6 +6,7 @@ import Pages from "./features/pages/components/Pages";
 import { Landing } from "./features/landing";
 import { Login, Register, Reset } from "./features/userProfile/index";
 import "./index.css";
+import Test from "./features/test/Test";
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
           path="/:userame/:workspaceName/:projectName/:pageName"
           element={<Editor />}
         />
+
+        <Route path="/test" element={<Test />} />
       </Routes>
     </Router>
   );
