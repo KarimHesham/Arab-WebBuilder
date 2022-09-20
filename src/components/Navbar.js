@@ -12,7 +12,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div
-        className="flex space-x-2 lg:space-x-6 items-center justify-center cursor-pointer"
+        className="flex cursor-pointer"
         onClick={() => navigate(`/${activeUser.username}/workspaces`)}
       >
         <img
