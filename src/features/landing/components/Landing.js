@@ -8,51 +8,60 @@ import ScrollTop from './ScrollTop';
 
 import styles from "../../../style";
 
-const Landing = () => (
+import { useEffect } from 'react';
 
-  <div className='w-full overflow-hidden'>
+const Landing = () => {
 
-    {/* navbar */}
-    <div className={`${styles.paddingX} ${styles.flexCenter} fixed top-0 left-0 right-0 z-10 shadow-md navbar-bg`}>
-      <div className={`${styles.boxWidth}`}>
-        <Navbar />
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, []);
+
+  return (
+
+    <div className='w-full overflow-hidden'>
+
+      {/* navbar */}
+      <div className={`${styles.paddingX} ${styles.flexCenter} fixed top-0 left-0 right-0 z-10 shadow-md navbar-bg`}>
+        <div className={`${styles.boxWidth}`}>
+          <Navbar />
+        </div>
       </div>
-    </div>
-    {/* navbar */}
+      {/* navbar */}
 
-    {/* Header section */}
-    <div className={`bg-gray-gradient ${styles.flexStart}`}>
-      <div className={`${styles.boxWidth}`}>
-        <Header />
+      {/* Header section */}
+      <div className={`bg-gray-gradient ${styles.flexStart}`}>
+        <div className={`${styles.boxWidth}`}>
+          <Header />
+        </div>
       </div>
-    </div>
-    {/* Header section */}
+      {/* Header section */}
 
-    {/* sections */}
-    <div className={`bg-gray-100 ${styles.paddingX} ${styles.flexStart}`}>
-      <div className={`${styles.boxWidth}`}>
-        <What />
+      {/* sections */}
+      <div className={`bg-gray-100 ${styles.paddingX} ${styles.flexStart}`}>
+        <div className={`${styles.boxWidth}`}>
+          <What />
+        </div>
       </div>
-    </div>
 
-    <div className={`${styles.paddingX} ${styles.flexStart} bg-gray-gradient`}>
-      <div className={`${styles.boxWidth}`}>
-        <Features />
+      <div className={`${styles.paddingX} ${styles.flexStart} bg-gray-gradient`}>
+        <div className={`${styles.boxWidth}`}>
+          <Features />
+        </div>
       </div>
-    </div>
 
-    <div className={`bg-gray-100 ${styles.paddingX} ${styles.flexStart}`}>
-      <div className={`${styles.boxWidth}`}>
-        <Support />
+      <div className={`bg-gray-100 ${styles.paddingX} ${styles.flexStart}`}>
+        <div className={`${styles.boxWidth}`}>
+          <Support />
+        </div>
       </div>
+
+      <Footer />
+      {/* sections */}
+
+      <ScrollTop />
+
     </div>
-
-    <Footer />
-    {/* sections */}
-
-    <ScrollTop />
-
-  </div>
-);
+  );
+}
 
 export default Landing;
